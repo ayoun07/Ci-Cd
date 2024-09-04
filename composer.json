@@ -1,0 +1,15 @@
+{
+    "name": "news/safe-base",
+    "autoload": {
+        "psr-4": {
+            "Safebase\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Lionelc13",
+            "email": "lionelc.13@gmail.com"
+        }
+    ],
+    "require": {}
+}
