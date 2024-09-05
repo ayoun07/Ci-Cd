@@ -39,7 +39,7 @@ class DaoAppli
 
         if (!isset($this->db)) {
             try {
-                $this->db = new PDO($type . ":host=" . $host . ":" . $port . ";charset=utf8;dbname=" . $db_name, $username, $password);
+                $this->db = new PDO($type . ":host=" . $host . ";port=" . $port . ";dbname=" . $db_name, $username, $password);
                 $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch (\PDOException $e) {
                 $monErreur = $this::retourneErreur($e->getCode(), $e->getMessage());

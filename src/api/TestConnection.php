@@ -35,7 +35,7 @@ class testconnection
         }
         if ($type == 'mysql') {
             // mysqldump --opt --single-transaction -h localhost -u root -ptoto super-reminder > "C:\\wamp64\\www\\laplateforme\\safebase-1\\dumps"
-            $commande = 'mysqldump --opt -h ' . $host . ' -u ' . $username . ' -p' . $password . ' ' . $db_name . ' > "' . $ExportPath . '"';
+            $commande = 'mysqldump --opt --port=' . $port . ' -h ' . $host . ' -u ' . $username . ' -p' . $password . ' ' . $db_name . ' > "' . $ExportPath . '"';
         }
         if ($type == 'pgsql') {
             // pg_dump -U utilisateur -h hôte -p port nom_de_la_base > fichier_de_dump.sql

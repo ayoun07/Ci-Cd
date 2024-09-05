@@ -26,20 +26,20 @@ if ($method == 'get' and $route == '/') {
     $cntrl->getIndex();
 } elseif ($method == 'get' && $route == '/api/testconnection') {
     //valeurs en dur pour une DB mysql
-    $type = 'mysql';
-    $host = 'localhost';
-    $db_name = 'super-reminder';
-    $port = '3306';
-    $username = 'root';
-    $password = 'toto';
+    // $type = 'mysql';
+    // $host = 'localhost';
+    // $db_name = 'super-reminder';
+    // $port = 'default';
+    // $username = 'root';
+    // $password = 'toto';
 
     //valeurs en dur pour une DB pgsql
-    // $type = 'pgsql';
-    // $host = 'localhost';
-    // $db_name = 'testpostgressql';
-    // $port = '5432';
-    // $username = 'postgres';
-    // $password = 'toto';
+    $type = 'pgsql';
+    $host = 'localhost';
+    $db_name = 'testpostgressql';
+    $port = '5432';
+    $username = 'postgres';
+    $password = 'toto';
 
     $api->test($type, $host, $port, $db_name, $username, $password);
 } else {
