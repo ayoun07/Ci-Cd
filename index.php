@@ -13,6 +13,8 @@ require_once __DIR__ . '/vendor/autoload.php';
 $uri = $_SERVER['REQUEST_URI'];
 $route = explode('?', $uri)[0];
 $method = strtolower($_SERVER['REQUEST_METHOD']);
+//separe les segments de l'adresse
+$segments = explode('/', trim($route, '/'));
 // echo $route . ' - ' . $method;
 
 $cntrl = new CntrlAppli;
@@ -22,12 +24,8 @@ if ($method == 'get' and $route == '/') {
     $cntrl->getIndex();
 } elseif ($method == 'post' and $route == '/inscription') {
     $cntrl->getIndex();
-} elseif ($method == 'get' && $route == '/api/testconnection') {
-    // $word = $_GET['url'];
-    // $database = $_GET['database'];
-    // $user = $_GET['user'];
-    // $password = $_GET['password'];
-    // $port = $GET['port'];
+
+} elseif ($method == 'get' and $segments[1] == 'testconnection'){
     $url       = "localhost";
         $database    = "echangeJeune";
         $port = "3306";
@@ -36,6 +34,7 @@ if ($method == 'get' and $route == '/') {
         $type = "mysql";
            
     $api->test($type,$url,$port , $database, $user, $password);
+
 } else {
     $cntrl->getIndex();
 }
