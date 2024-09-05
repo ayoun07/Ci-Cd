@@ -25,15 +25,16 @@ if ($method == 'get' and $route == '/') {
 } elseif ($method == 'post' and $route == '/inscription') {
     $cntrl->getIndex();
 
-} elseif ($method == 'get' and $segments[1] == 'testconnection'){
-    $url       = "localhost";
+} elseif ($method == 'get' and $route == '/api/testconnection'){
+        $url       = "localhost";
         $database    = "echangeJeune";
         $port = "3306";
         $user   = "Admin";
         $password   = "Azerty13";
         $type = "mysql";
-           
-    $api->test($type,$url,$port , $database, $user, $password);
+        $cntrl->getIndex();
+
+         $api->test($type,$url,$port , $database, $user, $password);
 
 } else {
     $cntrl->getIndex();

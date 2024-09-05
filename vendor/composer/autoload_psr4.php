@@ -6,5 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Symfony\\Component\\Process\\' => array($vendorDir . '/symfony/process'),
     'Safebase\\' => array($baseDir . '/src'),
+    'Cron\\' => array($vendorDir . '/cron/cron/src'),
 );
