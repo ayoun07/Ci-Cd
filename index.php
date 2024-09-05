@@ -1,5 +1,7 @@
 <?php
-declare (strict_types = 1);
+
+declare(strict_types=1);
+
 namespace Safebase;
 
 use Safebase\api\testconnection;
@@ -23,19 +25,23 @@ if ($method == 'get' and $route == '/') {
 } elseif ($method == 'post' and $route == '/inscription') {
     $cntrl->getIndex();
 } elseif ($method == 'get' && $route == '/api/testconnection') {
-    // $word = $_GET['url'];
-    // $database = $_GET['database'];
-    // $user = $_GET['user'];
-    // $password = $_GET['password'];
-    // $port = $GET['port'];
-    $url       = "localhost";
-        $database    = "echangeJeune";
-        $port = "3306";
-        $user   = "Admin";
-        $password   = "Azerty13";
-        $type = "mysql";
-           
-    $api->test($type,$url,$port , $database, $user, $password);
+    //valeurs en dur pour une DB mysql
+    $type = 'mysql';
+    $host = 'localhost';
+    $db_name = 'super-reminder';
+    $port = '3306';
+    $username = 'root';
+    $password = 'toto';
+
+    //valeurs en dur pour une DB pgsql
+    // $type = 'pgsql';
+    // $host = 'localhost';
+    // $db_name = 'testpostgressql';
+    // $port = '5432';
+    // $username = 'postgres';
+    // $password = 'toto';
+
+    $api->test($type, $host, $port, $db_name, $username, $password);
 } else {
     $cntrl->getIndex();
 }

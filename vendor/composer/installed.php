@@ -1,0 +1,41 @@
+<?php return array(
+    'root' => array(
+        'name' => 'news/safe-base',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => 'ea0960923107b17d1d2f31090b0c97b202442a66',
+        'type' => 'library',
+        'install_path' => __DIR__ . '/../../',
+        'aliases' => array(),
+        'dev' => true,
+    ),
+    'versions' => array(
+        'cron/cron' => array(
+            'pretty_version' => '1.9.0',
+            'version' => '1.9.0.0',
+            'reference' => '78ca6947e26b3941d89a4a01cc08971e900c054e',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../cron/cron',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'news/safe-base' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => 'ea0960923107b17d1d2f31090b0c97b202442a66',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'symfony/process' => array(
+            'pretty_version' => 'v6.4.8',
+            'version' => '6.4.8.0',
+            'reference' => '8d92dd79149f29e89ee0f480254db595f6a6a2c5',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/process',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+    ),
+);

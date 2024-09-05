@@ -11,5 +11,7 @@
             "email": "lionelc.13@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "cron/cron": "^1.9"
+    }
 }

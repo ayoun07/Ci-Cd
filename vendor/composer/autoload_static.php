@@ -9,14 +9,27 @@ class ComposerStaticInit841cdbe39eb57971e83c7f745ac4ea4a
     public static $prefixLengthsPsr4 = array (
         'S' => 
         array (
+            'Symfony\\Component\\Process\\' => 26,
             'Safebase\\' => 9,
+        ),
+        'C' => 
+        array (
+            'Cron\\' => 5,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'Symfony\\Component\\Process\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/process',
+        ),
         'Safebase\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
+        ),
+        'Cron\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cron/cron/src',
         ),
     );
 
