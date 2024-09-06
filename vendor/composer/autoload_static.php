@@ -10,7 +10,12 @@ class ComposerStaticInit841cdbe39eb57971e83c7f745ac4ea4a
         'S' => 
         array (
             'Symfony\\Component\\Process\\' => 26,
+            'Symfony\\Component\\Process\\' => 26,
             'Safebase\\' => 9,
+        ),
+        'C' => 
+        array (
+            'Cron\\' => 5,
         ),
         'C' => 
         array (
@@ -19,6 +24,10 @@ class ComposerStaticInit841cdbe39eb57971e83c7f745ac4ea4a
     );
 
     public static $prefixDirsPsr4 = array (
+        'Symfony\\Component\\Process\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/process',
+        ),
         'Symfony\\Component\\Process\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/process',
