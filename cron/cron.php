@@ -11,17 +11,14 @@ if (PHP_OS === "WINNT") {
 
     // Commande pour créer la tâche cron
     // $command = "schtasks /create /tn \"testCronPHP\" /tr \"$phpPath $scriptPath\" /sc daily /st 19:45";
-    $command = "schtasks /create /tn \"testCronPHP\" /tr \"$phpPath $scriptPath\" /sc minute /mo 1";
+    $command = "schtasks /create /tn \"testCronPHP\" /tr \"$phpPath $scriptPath\" /sc minute /mo 1 /st 12:00";
     // équivalent à 45 19 * * * d'une tâche CRON
     // Exécute la commande
     exec($command, $output, $result);
+    
 } elseif (PHP_OS === "Linux") {
 
     echo 'Création de la tâche cron sous Linux via PHP...';
-
-    // Définir le chemin vers l'exécutable PHP et le script PHP
-    // $phpPath = '/usr/bin/php'; // Chemin vers l'exécutable PHP, ajuste-le si nécessaire
-    // $scriptPath = '/path/to/your/script.php'; // Chemin vers ton script PHP
 
     // Définir la commande cron à ajouter
     $cronJob = '45 19 * * * ' . escapeshellcmd($phpPath) . ' ' . escapeshellarg($scriptPath);
