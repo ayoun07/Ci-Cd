@@ -47,7 +47,49 @@ if ($method == 'get' and $route == '/') {
 
         $api->test($type, $url, $port, $database, $user, $password);
     }
+// Routes avec methodes post
+} elseif ($methode == 'post'){
+    // route vers databases
+    if ($segments[0] == 'database'){
+        if (isset($segment[1]) and $segments[1] == 'create'){
+
+        } elseif (isset($segment[1]) and $segments[1] == 'update'){
+
+        } elseif (isset($segment[1]) and $segments[1] == 'delete'){
+
+        } elseif (isset($segment[1]) and $segments[1] == 'read'){
+
+        }
+
+    }
+    // route les taches plannifiées
+    if ($segments[0] == 'cron'){
+        if (isset($segment[1]) and $segments[1] == 'create'){
+
+        } elseif (isset($segment[1]) and $segments[1] == 'update'){
+
+        } elseif (isset($segment[1]) and $segments[1] == 'delete'){
+
+        } elseif (isset($segment[1]) and $segments[1] == 'read'){
+
+        }
+    }
+
+    if ($segments[0] == 'alert'){
+        if (isset($segment[1]) and $segments[1] == 'create'){
+            
+        }  elseif (isset($segment[1]) and $segments[1] == 'read'){
+
+        }
+    }
+    if ($segments[0] == 'backup'){
+        if (isset($segment[1]) and $segments[1] == 'create'){
+
+        }  elseif (isset($segment[1]) and $segments[1] == 'read'){
+
+        }
+    }
 // route vers index
-} else {
+}else {
     $cntrl->getIndex();
 }
