@@ -58,10 +58,7 @@ class DaoAppli
             if (strpos($message, 'Integrity') && (strpos($message, 'v_ema'))) {
                 return 'cet email existe déjà!';
             }
-        } elseif ($codeErr == '3819') {
-            if (strpos($message, 'TMIN')) {
-                return 'La chambre doit avoir une taille de 9m minimum!';
-            }
+        
         } elseif ($codeErr == '1049') {
             if (strpos($message, 'inconnue')) {
                 return 'Impossible de trouver la base de données!';

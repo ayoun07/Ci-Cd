@@ -3,7 +3,7 @@
         'name' => 'news/safe-base',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '1d5badb361a11e76352571463a668edce0a55ddf',
+        'reference' => 'bc23114a6ecc7bacf6d283a3bf373397a15e03c4',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -31,7 +31,7 @@
         'news/safe-base' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '1d5badb361a11e76352571463a668edce0a55ddf',
+            'reference' => 'bc23114a6ecc7bacf6d283a3bf373397a15e03c4',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
