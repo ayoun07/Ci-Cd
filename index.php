@@ -2,6 +2,7 @@
 declare (strict_types = 1);
 namespace Safebase;
 
+use Safebase\api\tachesCron;
 use Safebase\api\testconnection;
 use Safebase\controller\CntrlAppli;
 
@@ -16,26 +17,35 @@ $method = strtolower($_SERVER['REQUEST_METHOD']);
 //separe les segments de l'adresse
 $segments = explode('/', trim($route, '/'));
 // echo $route . ' - ' . $method;
-
+print_r($segments);
 $cntrl = new CntrlAppli;
 $api = new testconnection;
+$cron = new TachesCron;
 //-----------------------------------------------------------------------------------------------
 if ($method == 'get' and $route == '/') {
     $cntrl->getIndex();
-} elseif ($method == 'post' and $route == '/inscription') {
-    $cntrl->getIndex();
+} elseif ($method == 'get' and $segments[0] == 'api') {
+    // Routes vers CRON
+    if (isset($segments[2]) and $segments[1] == 'cron') {
+        echo('cron');
+        if (isset($segments[2]) and $segments[2] == 'create') {
+            echo('create');
+            $cron->createCron();
+        } else if (isset($segments[2]) and $segments[2] == 'delete') {
+            $cron->deleteTaskCron();
+        }
 
-} elseif ($method == 'get' and $route == '/api/testconnection'){
-        $url       = "localhost";
-        $database    = "echangeJeune";
+    } elseif ($method == 'get' and $segments[1] == 'testconnection') {
+        $url = "localhost";
+        $database = "echangeJeune";
         $port = "3306";
-        $user   = "Admin";
-        $password   = "Azerty13";
+        $user = "Admin";
+        $password = "Azerty13";
         $type = "mysql";
-        $cntrl->getIndex();
 
-         $api->test($type,$url,$port , $database, $user, $password);
-
+        $api->test($type, $url, $port, $database, $user, $password);
+    }
+// route vers index
 } else {
     $cntrl->getIndex();
 }

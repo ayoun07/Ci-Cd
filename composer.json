@@ -12,6 +12,7 @@
         }
     ],
     "require": {
-        "cron/cron": "^1.9"
+        "cron/cron": "^1.9",
+        "mtdowling/cron-expression": "^1.2"
     }
 }

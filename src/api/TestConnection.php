@@ -20,7 +20,7 @@ class testconnection
         $date = new \DateTimeImmutable();
         $formattedDateTime = $date->format('Ymd-His');
         $mysqlDump = 'C:\\wamp64\\bin\\mysql\\mysql8.0.31\\bin\\mysqldump.exe ';
-        $folder = 'c:\safebase\backup';
+        $folder = 'c:\backup';
 
         if (!file_exists($folder)) {
             $isCreated = mkdir($folder, 0777, true);

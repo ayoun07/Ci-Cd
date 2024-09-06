@@ -30,6 +30,7 @@ class ComposerStaticInit841cdbe39eb57971e83c7f745ac4ea4a
         'Cron\\' => 
         array (
             0 => __DIR__ . '/..' . '/cron/cron/src',
+            1 => __DIR__ . '/..' . '/mtdowling/cron-expression/src/Cron',
         ),
     );
 
