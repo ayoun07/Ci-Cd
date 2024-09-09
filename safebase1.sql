@@ -43,8 +43,8 @@ CREATE TABLE IF NOT EXISTS `alert` (
 -- Structure de la table `bachup`
 --
 
-DROP TABLE IF EXISTS `bachup`;
-CREATE TABLE IF NOT EXISTS `bachup` (
+DROP TABLE IF EXISTS `backup`;
+CREATE TABLE IF NOT EXISTS `backup` (
   `id` int NOT NULL AUTO_INCREMENT,
   `version` datetime NOT NULL,
   `FK_DATABASE` int NOT NULL,
