@@ -34,13 +34,14 @@ CREATE TABLE IF NOT EXISTS `alert` (
   `date_execution` varchar(50) NOT NULL,
   `FK_DATABASE` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_DATABASE` (`FK_DATABASE`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `FK_DATABASE` (`FK_DATABASE`),
+  FOREIGN KEY (`FK_DATABASE`) REFERENCES `client_database`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `bachup`
+-- Structure de la table `backup`
 --
 
 DROP TABLE IF EXISTS `backup`;
@@ -49,8 +50,9 @@ CREATE TABLE IF NOT EXISTS `backup` (
   `version` datetime NOT NULL,
   `FK_DATABASE` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_DATABASE` (`FK_DATABASE`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `FK_DATABASE` (`FK_DATABASE`),
+  FOREIGN KEY (`FK_DATABASE`) REFERENCES `client_database`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -69,8 +71,9 @@ CREATE TABLE IF NOT EXISTS `client_database` (
   `used_type` varchar(255) NOT NULL,
   `FK_Type` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_Type` (`FK_Type`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `FK_Type` (`FK_Type`),
+  FOREIGN KEY (`FK_Type`) REFERENCES `type`(`id`) ON DELETE SET NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -87,8 +90,9 @@ CREATE TABLE IF NOT EXISTS `tache_cron` (
   `heure` time DEFAULT NULL,
   `FK_DATABASE` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_DATABASE` (`FK_DATABASE`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `FK_DATABASE` (`FK_DATABASE`),
+  FOREIGN KEY (`FK_DATABASE`) REFERENCES `client_database`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -102,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `type` (
   `nom` varchar(50) NOT NULL,
   `version` decimal(15,2) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

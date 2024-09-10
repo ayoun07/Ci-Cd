@@ -158,9 +158,9 @@ CREATE TABLE `etudier` (
   `d_deb` date DEFAULT NULL,
   `d_fin` date DEFAULT NULL,
   PRIMARY KEY (`id_etu`,`id_vil`,`id_sta`),
-  KEY `idInnoDB (`id_vil`),
+  KEY `id_vil` (`id_vil`),
   KEY `id_sta` (`id_sta`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -184,9 +184,9 @@ CREATE TABLE `evaluation` (
   `v_com` varchar(255) NOT NULL,
   `i_eto` int NOT NULL,
   `id_etu` int NOT NULL,
-  PRIMARYInnoDB `id_eva`),
+  PRIMARY KEY (`id_eva`),
   UNIQUE KEY `uni_etudiant` (`id_etu`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -212,9 +212,9 @@ CREATE TABLE `facture` (
   `d_fac` date NOT NULL,
   `d_val` date NOT NULL,
   `id_etu` int NOT NULL,
-  PRIMARYInnoDB `no_fac`),
+  PRIMARY KEY (`no_fac`),
   KEY `fk_etudiant_fac` (`id_etu`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -235,9 +235,9 @@ DROP TABLE IF EXISTS `lien`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `lien` (
   `id_lie` int NOT NULL AUTO_INCREMENT,
-  `v_lib_InnoDB archar(25) NOT NULL,
+  `v_lib_lie` varchar(25) NOT NULL,
   PRIMARY KEY (`id_lie`)
-) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB  AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -267,9 +267,9 @@ CREATE TABLE `membre` (
   `d_ins` date DEFAULT (curdate()),
   PRIMARY KEY (`id_mem`),
   KEY `fk_etudiant_mem` (`id_etu`),
-  KEY `fkInnoDB mem` (`id_Lie`),
+  KEY `fk_lien_mem` (`id_Lie`),
   CONSTRAINT `date_inf_now` CHECK ((`d_nai_mem` < `d_ins`))
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB  AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -291,9 +291,9 @@ DROP TABLE IF EXISTS `statut`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `statut` (
   `id_sta` int NOT NULL,
-  `v_lib_InnoDB archar(20) NOT NULL,
+  `v_lib_sta` varchar(20) NOT NULL,
   PRIMARY KEY (`id_sta`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -313,9 +313,9 @@ DROP TABLE IF EXISTS `tampon`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tampon` (
-  `id` inInnoDB ULT NULL,
+  `id` int DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -337,9 +337,9 @@ DROP TABLE IF EXISTS `ville`;
 CREATE TABLE `ville` (
   `id_vil` int NOT NULL AUTO_INCREMENT,
   `cp` char(5) DEFAULT NULL,
-  `v_vil`InnoDB ar(50) NOT NULL,
+  `v_vil` varchar(50) NOT NULL,
   PRIMARY KEY (`id_vil`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -360,4 +360,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-09-05 13:58:08
+-- Dump completed on 2024-09-09 10:39:19

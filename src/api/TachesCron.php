@@ -5,6 +5,7 @@ class TachesCron
 {
     public function createCron()
     {
+        $taskCron='tacheCron';
         require 'cronPHP/cron.php';
     }
 

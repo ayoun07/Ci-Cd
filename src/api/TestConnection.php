@@ -5,7 +5,7 @@ use Safebase\dao\DaoAppli;
 
 class testconnection
 {
-    public function test($type, $host, $port, $db_name, $username, $password)
+    public function test($type, $host, $port, $db_name, $username, $password):bool
     // public function test()
     {
         $dao = new DaoAppli;
@@ -51,11 +51,14 @@ class testconnection
         switch ($result) {
             case 0:
                 echo 'La base de données <b>' . $db_name . '</b> a été sauvegardée avec succès dans le chemin suivant : ' . getcwd() . '/' . $ExportPath;
+                $isOk = true;
                 break;
             case 1:
+                $isOk=false;
                 echo 'Une erreur s\'est produite lors de l\'exportation de <b>' . $db_name . '</b> vers ' . getcwd() . '/' . $ExportPath;
                 break;
             default:
+                $isOk=false;
                 echo 'Une erreur d\'exportation s\'est produite, veuillez vérifier les informations de connexion.';
         }
 
@@ -63,5 +66,6 @@ class testconnection
         echo ('<hr><pre>');
         var_dump($GLOBALS);
         echo ('</pre>');
+        return $isOk;
     }
 }
