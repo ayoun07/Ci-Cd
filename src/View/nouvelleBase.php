@@ -18,11 +18,11 @@
             <label for="password">Mot de passe: </label><input type="password" id="password" name="password" required>
         </div>
         <div>
-        <label for="type">Type de base de données :</label>
-        <select name="type" id="type">
-            <option value="1">mysql</option>
-            <option value="2">pgsql</option>
-        </select>
+            <label for="type">Type de base de données :</label>
+            <select name="type" id="type">
+                <option value="1">mysql</option>
+                <option value="2">pgsql</option>
+            </select>
         </div>
 
         <div>

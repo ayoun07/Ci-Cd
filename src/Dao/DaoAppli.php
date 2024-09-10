@@ -67,6 +67,14 @@ class DaoAppli
         
     }
 
+    public function getListDatabase(){
+        $requete = Requete::SEL_CLIENT_DATABASE;
+        $statement = $this->db->query($requete); 
+        $data=$statement->fetchAll();
+        return $data;
+        
+    }
+
     // On essai de se connecter à la base de données
     public function tryConnection($type, $host, $port, $db_name, $username, $password)
     {

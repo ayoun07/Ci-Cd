@@ -35,7 +35,8 @@ if ($method == 'get') {
             echo ('cron');
             if (isset($segments[2]) and $segments[2] == 'create') {
                 echo ('create');
-                $cron->createCron();
+                // $cron->createCron();
+                $cntrl->affFormCron();
             } else if (isset($segments[2]) and $segments[2] == 'delete') {
                 $cron->deleteTaskCron();
             }

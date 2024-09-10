@@ -10,6 +10,18 @@
     <form action="/cron/create" method="post">
         <div>
             <label for="nom">Nom de la tache: </label><input type="text" id="nom" name="nom" required>
+        <div>
+        
+            <label for="iddatabase">Type de base de données :</label>
+        <select name="nom" id="type">
+            <?php foreach($databases as $database){ ?>
+                <option value=" <?= $database['id'] ?>"><?= $database['nom']  ?></option> 
+            <?php } ?>
+        </select>
+        </div>
+
+
+
         </div>
         <div>
             <label for="iddatabase">Nom database: </label><input type="text" id="iddatabase" name="iddatabase" required>

@@ -18,6 +18,13 @@ class CntrlAppli
 
     }
 
+    public function affFormCron()
+    {
+        $dao = new DaoAppli;
+        $databases = $dao->getListDatabase();
+        require 'src/view/nouvelleTache.php';
+    }
+
     public function createDatabase()
     {
         $database = new Database(name: htmlspecialchars($_POST['name']),
