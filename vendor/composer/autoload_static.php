@@ -44,7 +44,6 @@ class ComposerStaticInit3a44fa74503bcb280838b2c9cf142171
     );
 
     public static $prefixDirsPsr4 = array (
-<<<<<<< HEAD
         'phpDocumentor\\Reflection\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
@@ -86,20 +85,6 @@ class ComposerStaticInit3a44fa74503bcb280838b2c9cf142171
         'DeepCopy\\' => 
         array (
             0 => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy',
-=======
-        'Symfony\\Component\\Process\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/process',
-        ),
-        'Safebase\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src',
-        ),
-        'Cron\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/cron/cron/src',
-            1 => __DIR__ . '/..' . '/mtdowling/cron-expression/src/Cron',
->>>>>>> f8f86fb9f7229767fa74f8daec31d5ac842a011d
         ),
     );
 
