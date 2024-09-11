@@ -1,0 +1,153 @@
+<?php
+
+namespace Safebase\dao;
+
+use \PDO as PDO;
+
+//require_once 'src/controller/Utilitaire.php';
+class DaoAppli
+{
+
+    private PDO $db;
+    public function __construct(){
+         $this->db = $this->getConnection();
+    }
+    //On essai de se connecter à la base de données
+    private function getConnection() {
+        $host       = "localhost";
+        $db_name    = "safebase";
+        $username   = "root";
+        $password   = "toto";
+
+        if (!isset($this->db)) {
+            try {
+                $this->db = new PDO("mysql:host=".$host.";charset=utf8;dbname=".$db_name, $username, $password);
+                $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            } catch (\PDOException $e) {
+                    echo('Echec de la connexion: ' . $e->getMessage());
+                die();
+            }
+        }
+        return $this->db;
+    }
+
+    public function createNewBase($database): bool
+    {   
+        $requete = Requete::INS_DATABASE;
+        
+        $statement = $this->db->prepare($requete);
+
+        $passwordHash=password_hash($database->getpassword(),PASSWORD_DEFAULT);
+
+        $statement->bindValue(":nom",$database->getname(),PDO::PARAM_STR);
+        $statement->bindValue(":password",$passwordHash,PDO::PARAM_STR);
+        $statement->bindValue(":port",$database->getport(),PDO::PARAM_STR);
+        $statement->bindValue(":url",$database->gethost(),PDO::PARAM_STR);
+        $statement->bindValue(":used_type",$database->getusedType(),PDO::PARAM_STR);
+        $statement->bindValue(":user" ,$database->getuserName(),PDO::PARAM_STR);
+        $statement->bindValue(":type_base",$database->gettype(),PDO::PARAM_INT);
+        //On essaie d'ajouter une nouvelle base
+        try {
+            $statement->execute();
+            echo('creation de la base de données');
+            $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            return true;
+        }
+        catch (\PDOException $e) {
+            echo($this::retourneErreur($e->getCode(),$e->getMessage()));
+            return false;
+        }
+    }
+
+    public function getListType(){
+        $requete = Requete::SEL_TYPE_BASE;
+        $statement = $this->db->query($requete); 
+        $data=$statement->fetchAll();
+        return $data;
+        
+    }
+
+    public function getListDatabase(){
+        $requete = Requete::SEL_CLIENT_DATABASE;
+        $statement = $this->db->query($requete); 
+        $data=$statement->fetchAll();
+        return $data;
+        
+    }
+
+    // On essai de se connecter à la base de données
+    public function tryConnection($type, $host, $port, $db_name, $username, $password)
+    {
+        $monErreur = 'Connection réussie ! ';
+
+        if (!isset($this->db)) {
+            try {
+                $this->db = new PDO($type . ":host=" . $host . ";port=" . $port . ";dbname=" . $db_name, $username, $password);
+                $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $this->createNewBase($type, $host, $port, $db_name, $username, $password);
+            } catch (\PDOException $e) {
+                $monErreur = $this::retourneErreur($e->getCode(), $e->getMessage());
+                die($e->getCode() . ":" . $monErreur);
+            }
+        }
+        echo ($monErreur);
+
+        return $this->db;
+    }
+
+    public static function retourneErreur($codeErr, $message)
+    {
+
+        if ($codeErr == '23000') {
+            if (strpos($message, 'Integrity') && (strpos($message, 'v_ema'))) {
+                return 'cet email existe déjà!';
+            }
+        
+        } elseif ($codeErr == '1049') {
+            if (strpos($message, 'inconnue')) {
+                return 'Impossible de trouver la base de données!';
+            }
+        } elseif ($codeErr == '1045') {
+            if (strpos($message, 'Accès refusé')) {
+                return 'Utilistateur ou mot de passe inconnu';
+            }
+        } elseif ($codeErr == '2002') {
+            if (strpos($message, 'inconnu')) {
+                return 'Impossible de contacter l URL de la base de données! Veuillez vérifier votre connexion';
+            }
+        } else {
+            return $message;
+        }
+    }
+
+
+
+
+
+
+    public function createNewTask($cron): bool
+    {   
+        $requete = Requete::INS_CRON;
+        
+        $statement = $this->db->prepare($requete);
+        
+        $dateString= date_format($cron->getDateStart(),'Y-m-d');
+        $timeString = date_format($cron->getHeure(),'H:i');
+        $statement->bindValue(":nom",$cron->getName(),PDO::PARAM_STR);
+        $statement->bindValue(":recurrence",$cron->getRecurrence(),PDO::PARAM_STR);
+        $statement->bindValue(":date_demarrage",$dateString,PDO::PARAM_STR);
+        $statement->bindValue(":heure",$timeString,PDO::PARAM_STR);
+        $statement->bindValue(":FK_DATABASE",$cron->getIdDatabase()->getId(),PDO::PARAM_STR);
+        //On essaie d'ajouter une nouvelle base
+        try {
+            $statement->execute();
+            echo('creation de la base de données');
+            $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            return true;
+        }
+        catch (\PDOException $e) {
+            echo($this::retourneErreur($e->getCode(),$e->getMessage()));
+            return false;
+        }
+    }
+}
