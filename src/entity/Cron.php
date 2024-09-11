@@ -13,12 +13,13 @@ class Cron
     private ?string $recurrence;
     private ?Database $idDatabase;
 
-    public function __construct($id = 0,
-        ?string $name = '',
-        ?DateTime $dateStart = null,
-        ?DateTime $heure = null,
-        ?string $recurrence = null,
-        ?int $idDatabase=0) {
+    public function __construct(?int $id,
+        ?string $name,
+        ?DateTime $dateStart,
+        ?DateTime $heure,
+        ?string $recurrence,
+        ?Database $idDatabase)
+         {
         $this->id = $id;
         $this->name = $name;
         $this->dateStart = $dateStart;

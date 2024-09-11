@@ -14,5 +14,7 @@ class Requete {
     public const INS_DATABASE = "INSERT INTO client_database
          (nom,password, port,url, used_type, user_database, FK_Type)
         values(:nom, :password, :port, :url,:used_type, :user, :type_base)";
+    public const INS_CRON = "INSERT INTO `tache_cron`(`nom`, `recurrence`, `date_demarrage`, `heure`, `FK_DATABASE`) 
+    VALUES (:nom, :recurrence, :date_demarrage, :heure,:FK_DATABASE)";
 
 }

@@ -119,4 +119,35 @@ class DaoAppli
             return $message;
         }
     }
+
+
+
+
+
+
+    public function createNewTask($cron): bool
+    {   
+        $requete = Requete::INS_CRON;
+        
+        $statement = $this->db->prepare($requete);
+        
+        $dateString= date_format($cron->getDateStart(),'Y-m-d');
+        $timeString = date_format($cron->getHeure(),'H:i');
+        $statement->bindValue(":nom",$cron->getName(),PDO::PARAM_STR);
+        $statement->bindValue(":recurrence",$cron->getRecurrence(),PDO::PARAM_STR);
+        $statement->bindValue(":date_demarrage",$dateString,PDO::PARAM_STR);
+        $statement->bindValue(":heure",$timeString,PDO::PARAM_STR);
+        $statement->bindValue(":FK_DATABASE",$cron->getIdDatabase()->getId(),PDO::PARAM_STR);
+        //On essaie d'ajouter une nouvelle base
+        try {
+            $statement->execute();
+            echo('creation de la base de données');
+            $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            return true;
+        }
+        catch (\PDOException $e) {
+            echo($this::retourneErreur($e->getCode(),$e->getMessage()));
+            return false;
+        }
+    }
 }
