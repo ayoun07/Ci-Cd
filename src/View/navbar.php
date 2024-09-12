@@ -1,17 +1,27 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="/">Home</a>
-        <a class="nav-link" href="/task">Databases</a>
-        <a class="nav-link" href="/database">Task cron</a>
-        <a class="nav-link" href="/alert">Alert</a>
-      </div>
+<nav class="navbar bg-body-tertiary d-flex flex-column vh-100" style="width: 110px;" data-bs-theme="dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" id="basesafe" href="#">
+            <img class="safebaseico" src="safebase.ico" alt="SafeBase Icon" /></br>SafeBase
+        </a>
+        <div class="navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" id="base" aria-current="page" href="#">
+                        <i class="fas fa-database"></i></br>Databases</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="backup" href="#">
+                        <i class="fas fa-backward"></i></br>Backups</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fas fa-trash-can-arrow-up"></i></br>Restorations</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="bell" id="#">
+                        <i class="fas fa-bell"></i></br>Alerts</a>
+                </li>
+            </ul>
+        </div>
     </div>
-  </div>
 </nav>
-
