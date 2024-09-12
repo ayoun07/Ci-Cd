@@ -2,6 +2,7 @@
 $title = 'Create database';
 $myDescription= 'Ajout une base de donnée ratachée à mon programme';
 require "header.php";
+require "navbar.php";
 ?>
 <body>
     <H1>Ajout d'une base de données</H1>

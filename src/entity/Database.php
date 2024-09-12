@@ -2,7 +2,9 @@
 
 namespace Safebase\entity;
 
-class Database {
+use Safebase\dao\DaoAppli;
+
+class Database extends DaoAppli {
     private int $id;
     private string $name;
     private string $password;
@@ -33,23 +35,11 @@ public function __construct(
         $this->host = $host;
     }
 
-    /**
-     * Get the value of id
-     *
-     * @return int
-     */
     public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * Set the value of id
-     *
-     * @param int $id
-     *
-     * @return self
-     */
     public function setId(int $id): self
     {
         $this->id = $id;
@@ -57,23 +47,12 @@ public function __construct(
         return $this;
     }
 
-    /**
-     * Get the value of password
-     *
-     * @return string
-     */
     public function getPassword(): string
     {
         return $this->password;
     }
 
-    /**
-     * Set the value of password
-     *
-     * @param string $password
-     *
-     * @return self
-     */
+  
     public function setPassword(string $password): self
     {
         $this->password = $password;
@@ -81,23 +60,11 @@ public function __construct(
         return $this;
     }
 
-    /**
-     * Get the value of name
-     *
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * Set the value of name
-     *
-     * @param string $name
-     *
-     * @return self
-     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -115,13 +82,6 @@ public function __construct(
         return $this->userName;
     }
 
-    /**
-     * Set the value of userName
-     *
-     * @param string $userName
-     *
-     * @return self
-     */
     public function setUserName(string $userName): self
     {
         $this->userName = $userName;
@@ -129,23 +89,12 @@ public function __construct(
         return $this;
     }
 
-    /**
-     * Get the value of port
-     *
-     * @return string
-     */
+    
     public function getPort(): string
     {
         return $this->port;
     }
 
-    /**
-     * Set the value of port
-     *
-     * @param string $port
-     *
-     * @return self
-     */
     public function setPort(string $port): self
     {
         $this->port = $port;
@@ -153,23 +102,11 @@ public function __construct(
         return $this;
     }
 
-    /**
-     * Get the value of type
-     *
-     * @return int
-     */
     public function getType(): int
     {
         return $this->type;
     }
 
-    /**
-     * Set the value of type
-     *
-     * @param int $type
-     *
-     * @return self
-     */
     public function setType(int $type): self
     {
         $this->type = $type;
@@ -177,23 +114,11 @@ public function __construct(
         return $this;
     }
 
-    /**
-     * Get the value of usedType
-     *
-     * @return string
-     */
     public function getUsedType(): string
     {
         return $this->usedType;
     }
 
-    /**
-     * Set the value of usedType
-     *
-     * @param string $usedType
-     *
-     * @return self
-     */
     public function setUsedType(string $usedType): self
     {
         $this->usedType = $usedType;
@@ -201,27 +126,30 @@ public function __construct(
         return $this;
     }
 
-    /**
-     * Get the value of host
-     *
-     * @return string
-     */
     public function getHost(): string
     {
         return $this->host;
     }
 
-    /**
-     * Set the value of host
-     *
-     * @param string $host
-     *
-     * @return self
-     */
     public function setHost(string $host): self
     {
         $this->host = $host;
-
         return $this;
+    }
+
+    public function createDatabase()
+    {
+        $database = new Database(name: htmlspecialchars($_POST['name']),
+            password: htmlspecialchars($_POST['password']),
+            userName: htmlspecialchars($_POST['user']),
+            port: htmlspecialchars($_POST['port']),
+            host: htmlspecialchars($_POST['host']),
+            type: 1,
+            usedType: 'prod');
+        $this->createNewBase($database);
+    } 
+    public function listDatabase():array
+    {
+        return $this->getListDatabase();
     }
 }
