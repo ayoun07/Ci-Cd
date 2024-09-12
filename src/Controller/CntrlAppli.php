@@ -18,10 +18,5 @@ class CntrlAppli
     {
         require 'src/view/index.php';
     }
-
-    
-
-    
-
-    
+  
 }

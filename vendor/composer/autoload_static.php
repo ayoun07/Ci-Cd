@@ -24,7 +24,7 @@ class ComposerStaticInit3a44fa74503bcb280838b2c9cf142171
         array (
             'Symfony\\Polyfill\\Ctype\\' => 23,
             'Symfony\\Component\\Yaml\\' => 23,
-            'SAFEBASE\\' => 9,
+            'Safebase\\' => 9,
         ),
         'P' => 
         array (
@@ -36,10 +36,6 @@ class ComposerStaticInit3a44fa74503bcb280838b2c9cf142171
             'Doctrine\\Instantiator\\' => 22,
             'Doctrine\\Deprecations\\' => 22,
             'DeepCopy\\' => 9,
-        ),
-        'C' => 
-        array (
-            'Cron\\' => 5,
         ),
     );
 
@@ -62,7 +58,7 @@ class ComposerStaticInit3a44fa74503bcb280838b2c9cf142171
         array (
             0 => __DIR__ . '/..' . '/symfony/yaml',
         ),
-        'SAFEBASE\\' => 
+        'Safebase\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
