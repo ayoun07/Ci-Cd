@@ -10,6 +10,7 @@ use Safebase\controller\CntrlAppli;
 use Safebase\Controller\CronController;
 use Safebase\Controller\DatabaseController;
 use Safebase\dao\DaoAppli;
+use Safebase\entity\Cron;
 use Safebase\entity\Database;
 
 require_once __DIR__ . '/vendor/autoload.php';
@@ -59,12 +60,14 @@ if ($segments[0] == 'database') {
             $cntrlCron->displayCron();
         }
     } elseif ($method == "post"){
-        $database = new Database(0);
-        $database->CreateCron();
+        $cntrlCron->createCron();
     } elseif ($method == "put") {
+        if (isset($segments[2])){
+            $cntrlCron->updateCron($segments[2]);
+        }
 
     } elseif ($method == "DELETE"){
-
+        $cntrlCron->deleteCron($_GET['id']);
     } 
 } else 
     $cntrl->getIndex();

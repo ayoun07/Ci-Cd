@@ -14,12 +14,12 @@ class Cron
     private ?string $recurrence;
     private ?Database $idDatabase;
 
-    public function __construct(?int $id,
-        ?string $name,
-        ?DateTime $dateStart,
-        ?DateTime $heure,
-        ?string $recurrence,
-        ?Database $idDatabase)
+    public function __construct(?int $id=0,
+        ?string $name ='',
+        ?DateTime $dateStart =null,
+        ?DateTime $heure=null,
+        ?string $recurrence='',
+        ?Database $idDatabase=null)
          {
         $this->id = $id;
         $this->name = $name;
@@ -110,7 +110,7 @@ class Cron
         // format la date de demarrage
         $dateTime = \DateTime::createFromFormat('Y-m-d', $_POST['datestart']);
         $time = \DateTime::createFromFormat('H:i', $_POST['heure']);
-        if ($dateTime and $time) {
+       if ($dateTime and $time) {
             $database = new Database($_POST['iddatabase']);
             $cron = new Cron(1, $_POST['nom'], $dateTime, $time, $_POST['recurrence'], $database);
             if ($dao->createNewTask($cron)) {
@@ -126,6 +126,6 @@ class Cron
     public function deleteCron(int $id)
     {
        $dao = new DaoAppli;
-        
+
     }
 }

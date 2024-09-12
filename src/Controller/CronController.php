@@ -13,5 +13,16 @@ class CronController
         $databases = $dao->getListDatabase();
         require 'src/view/nouvelleTache.php';
     }
- 
+    
+    public function createCron(){
+         $cron = new Cron();
+         $cron->CreateCron();
+    }
+    public function updateCron($id){
+        //todo
+    }
+    public function deleteCron($id){
+        $cron = new Cron();
+        $cron->deleteCron($id);
+    }
 }
