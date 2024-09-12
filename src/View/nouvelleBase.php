@@ -1,10 +1,35 @@
 <?php
 $title = 'Create database';
-$myDescription= 'Ajout une base de donnée ratachée à mon programme';
+$myDescription = 'Ajout une base de donnée ratachée à mon programme';
 require "header.php";
 require "navbar.php";
 ?>
+
 <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">SafeBase</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Databases</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Backups</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Restorations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Alerts</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <H1>Ajout d'une base de données</H1>
     <form action="/database/create" method="post">
         <div class="input-group mb-3">
@@ -34,4 +59,5 @@ require "navbar.php";
         </div>
     </form>
 </body>
+
 </html>
