@@ -1,4 +1,4 @@
-<nav class="navbar bg-body-tertiary d-flex flex-column vh-100" style="width: 110px;" data-bs-theme="dark">
+<nav class="navbar bg-body-tertiary d-flex flex-column vh-50" style="width: 110px;" data-bs-theme="dark">
     <div class="container-fluid">
         <a class="navbar-brand" id="basesafe" href="/">
             <img class="safebaseico" src="/src/View/safebase.ico" alt="SafeBase Icon" /></br>SafeBase

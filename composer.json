@@ -1,15 +1,9 @@
 {
     "name": "news/safe-base",
     "autoload": {
-<<<<<<< HEAD
         "psr-4": {
             "Safebase\\" : "src/"
         }
-=======
-      "psr-4": {
-        "Safebase\\": "src/"
-      }
->>>>>>> e7da4131d90582e08b7e0045aa60dc4405e68dc7
     },
     "authors": [
       {
