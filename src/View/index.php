@@ -8,36 +8,82 @@ require "header.php";
 <body>
     <div class="container-fluid d-flex">
         <?php require_once("NavBar.php") ?>
-        <h1 class="titre">Databases</h1>
-        <div class="col-auto ms-auto">
-            <button type="button" id="btnajout" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary d-flex flex-row align-items-end">Create database +</button>
+        <div class="d-flex flex-column w-100">
+            <!-- Container pour le titre et le bouton -->
+            <div class="d-flex justify-content-between mb-3">
+                <h1 class="titre">Databases</h1>
+                <!-- Bouton placé à l'extrême droite et légèrement en bas du titre -->
+                <button type="button" id="btnajout" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary w-10">
+                    Create database +
+                </button>
+            </div>
 
+            <!-- Tableau occupant toute la largeur -->
+            <div class="w-100">
+                <table class="table table-dark table-striped w-100">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Port</th>
+                            <th scope="col">URL</th>
+                            <th scope="col">Used_type</th>
+                            <th scope="col">User-database</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($databases as $database) { ?>
+
+
+                            <tr>
+                                <th scope="row"><?= $database['id'] ?></th>
+                                <td><?= $database['nom'] ?></td>
+                                <td><?= $database['port'] ?></td>
+                                <td><?= $database['url'] ?></td>
+                                <td><?= $database['used_type'] ?></td>
+                                <td><?= $database['user_database'] ?></td>
+                            </tr>
+                        <?php } ?>
+                        <!--<tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>@fat</td>
+                            <td>@fat</td>
+                            <td>@fat</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td colspan="2">Larry the Bird</td>
+                            <td>@twitter</td>
+                            <td>@twitter</td>
+                            <td>@twitter</td>
+                        </tr>-->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Modal d'ajout de base de données -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-
-
-
-                            <H1>Ajout d'une base de données</H1>
-
-
-
+                            <h1>Ajout d'une base de données</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <form action="/database/create" method="post">
                                 <div class="input-group mb-3">
-                                    <label class="form-label" for="name">Nom database: </label><input type="text" id="name" name="name"
-                                        required>
+                                    <label class="form-label" for="name">Nom database: </label>
+                                    <input type="text" id="name" name="name" required>
                                 </div>
                                 <div class="input-group mb-3">
-                                    <label class="form-label" for="user">Nom d'utilisateur: </label><input type="text" id="user" name="user"
-                                        required>
+                                    <label class="form-label" for="user">Nom d'utilisateur: </label>
+                                    <input type="text" id="user" name="user" required>
                                 </div>
                                 <div class="input-group mb-3">
-                                    <label class="form-label" for="password">Mot de passe: </label><input type="password" id="password"
-                                        name="password" required>
+                                    <label class="form-label" for="password">Mot de passe: </label>
+                                    <input type="password" id="password" name="password" required>
                                 </div>
                                 <div class="input-group mb-3">
                                     <label class="form-label" for="type">Type de base de données :</label>
@@ -47,12 +93,12 @@ require "header.php";
                                     </select>
                                 </div>
                                 <div class="input-group mb-3">
-                                    <label class="form-label" for="port">Port: </label><input type="text" id="port" placeholder="default or 
-port number" name="port"
-                                        required>
+                                    <label class="form-label" for="port">Port: </label>
+                                    <input type="text" id="port" placeholder="default or port number" name="port" required>
                                 </div>
                                 <div class="input-group mb-3">
-                                    <label class="form-label" for="host">URL </label><input type="text" id="host" name="host" required>
+                                    <label class="form-label" for="host">URL: </label>
+                                    <input type="text" id="host" name="host" required>
                                 </div>
                             </form>
                         </div>
@@ -65,7 +111,6 @@ port number" name="port"
             </div>
         </div>
     </div>
-</body>
 </body>
 
 </html>

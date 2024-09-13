@@ -1,4 +1,6 @@
 
+
+
 .navbar-brand{
     color: #6b8993;
     margin-bottom: 50px;
@@ -6,7 +8,7 @@
 
 .nav-item{
     color:red;
-    margin-bottom: 75px;
+    margin-bottom: 59.8px;
 }
 
 #backup{
@@ -61,10 +63,14 @@ body{
 }
 
 #btnajout{
-    margin-top: 40%;
-    height: 5%;
-    width: 100%;
+    margin-top: 5%;
+    height: 10%;
     font-weight: bold;
+}
+
+.table{
+    margin-top: -30%;
+    margin-left: 5px;
 }
 
 
