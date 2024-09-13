@@ -75,10 +75,12 @@ if ($segments[0] == 'database') {
     } elseif ($method == "DELETE"){
         $cntrlCron->deleteCron($_GET['id']);
     } 
-} elseif ($segments[0] == 'save') {
+} elseif ($segments[0] == 'Save') {
     $cntrlBackup->displayBackup();
 } elseif ($segments[0] == 'restore') {
     $cntrlRestore->displayBackup();
+} elseif ($segments[0] == 'Alert') {
+    $cntrlAlert->displayAlert();
 }
 else 
     $cntrl->getIndex();

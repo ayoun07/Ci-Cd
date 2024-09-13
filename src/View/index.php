@@ -2,7 +2,7 @@
 $title = 'Accueil';
 $myDescription= 'Accueil';
 require "header.php";
-require "navbar.php";
+//require "navbar.php";
 ?>
 <html>
 
