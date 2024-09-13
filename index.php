@@ -6,9 +6,12 @@ namespace Safebase;
 
 use Safebase\api\tachesCron;
 use Safebase\api\testconnection;
+use Safebase\Controller\AlertController;
+use Safebase\Controller\BackupController;
 use Safebase\controller\CntrlAppli;
 use Safebase\Controller\CronController;
 use Safebase\Controller\DatabaseController;
+use Safebase\Controller\RestoreController;
 use Safebase\dao\DaoAppli;
 use Safebase\entity\Cron;
 use Safebase\entity\Database;
@@ -30,6 +33,9 @@ $api = new testconnection;
 $cron = new TachesCron;
 $dao = new DaoAppli;
 $cntrlDb = new DatabaseController;
+$cntrlBackup = new BackupController;
+$cntrlAlert = new AlertController;
+$cntrlRestore = new RestoreController;
 
 //-----------------------------------------------------------------------------------------------
 
@@ -69,7 +75,12 @@ if ($segments[0] == 'database') {
     } elseif ($method == "DELETE"){
         $cntrlCron->deleteCron($_GET['id']);
     } 
-} else 
+} elseif ($segments[0] == 'backup') {
+    $cntrlBackup->displayBackup();
+} elseif ($segments[0] == 'restore') {
+    $cntrlRestore->displayBackup();
+}
+else 
     $cntrl->getIndex();
 
 
