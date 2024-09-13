@@ -8,7 +8,7 @@ class RestoreController extends CntrlAppli
 {
     public function displayBackup()
     {
-        require 'src/view/restore.php';
+        require 'src/view/Restorations.php';
     }
     
 }

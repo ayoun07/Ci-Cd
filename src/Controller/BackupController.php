@@ -8,7 +8,7 @@ class BackupController extends CntrlAppli
 {
     public function displayBackup()
     {
-        require 'src/view/backup.php';
+        require 'src/view/Backups.php';
     }
     
 }

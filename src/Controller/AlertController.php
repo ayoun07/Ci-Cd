@@ -3,9 +3,9 @@ namespace Safebase\Controller;
 
 class AlertController extends CntrlAppli
 {
-    public function displayDatabase()
+    public function displayAlert()
     {
-        require 'src/view/alert.php';
+        require 'src/view/Alerts.php';
     }
     
 }

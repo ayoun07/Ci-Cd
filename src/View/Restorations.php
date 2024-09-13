@@ -1,8 +1,7 @@
 <?php
-$title = 'Accueil';
-$myDescription= 'Accueil';
+$title = 'Create new restore';
+$myDescription = 'Ajout une nouvelle restorations';
 require "header.php";
-//require "navbar.php";
 ?>
 <html>
 
@@ -12,10 +11,10 @@ require "header.php";
         <div class="d-flex flex-column w-100">
             <!-- Container pour le titre et le bouton -->
             <div class="d-flex justify-content-between mb-3">
-                <h1 class="titre">Databases</h1>
+                <h1 class="titre">Restorations</h1>
                 <!-- Bouton placé à l'extrême droite et légèrement en bas du titre -->
                 <button type="button" id="btnajout" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary w-10">
-                    Create database +
+                    Create restoration +
                 </button>
             </div>
 
@@ -33,19 +32,15 @@ require "header.php";
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($databases as $database) { ?>
-
-
-                            <tr>
-                                <th scope="row"><?= $database['id'] ?></th>
-                                <td><?= $database['nom'] ?></td>
-                                <td><?= $database['port'] ?></td>
-                                <td><?= $database['url'] ?></td>
-                                <td><?= $database['used_type'] ?></td>
-                                <td><?= $database['user_database'] ?></td>
-                            </tr>
-                        <?php } ?>
-                        <!--<tr>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                        </tr>
+                        <tr>
                             <th scope="row">2</th>
                             <td>Jacob</td>
                             <td>Thornton</td>
@@ -59,7 +54,7 @@ require "header.php";
                             <td>@twitter</td>
                             <td>@twitter</td>
                             <td>@twitter</td>
-                        </tr>-->
+                        </tr>
                     </tbody>
                 </table>
             </div>

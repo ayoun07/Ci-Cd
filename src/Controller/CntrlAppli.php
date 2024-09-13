@@ -16,6 +16,8 @@ class CntrlAppli
 
     public function getIndex()
     {
+        $dao = new DaoAppli;
+        $databases = $dao->getListDatabase();
         require 'src/view/index.php';
     }
   

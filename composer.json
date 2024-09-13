@@ -1,9 +1,9 @@
 {
     "name": "news/safe-base",
     "autoload": {
-      "psr-4": {
-        "Safebase\\": "src/"
-      }
+        "psr-4": {
+            "Safebase\\" : "src/"
+        }
     },
     "authors": [
       {
