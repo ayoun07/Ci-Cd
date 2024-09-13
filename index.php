@@ -75,7 +75,7 @@ if ($segments[0] == 'database') {
     } elseif ($method == "DELETE"){
         $cntrlCron->deleteCron($_GET['id']);
     } 
-} elseif ($segments[0] == 'backup') {
+} elseif ($segments[0] == 'save') {
     $cntrlBackup->displayBackup();
 } elseif ($segments[0] == 'restore') {
     $cntrlRestore->displayBackup();
