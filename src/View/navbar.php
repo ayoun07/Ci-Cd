@@ -6,7 +6,7 @@
         <div class="navbar-collapse" id="navbarNav">
             <ul class="navbar-nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link" id="base" aria-current="page" href="/database">
+                    <a class="nav-link" id="base" aria-current="page" href="#">
                         <i class="fas fa-database"></i></br>Databases</a>
                 </li>
                 <li class="nav-item">
@@ -14,11 +14,11 @@
                         <i class="fas fa-backward"></i></br>Backups</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/restore">
+                    <a class="nav-link" href="#">
                         <i class="fas fa-trash-can-arrow-up"></i></br>Restorations</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="bell" id="/alert">
+                    <a class="nav-link" id="bell" id="#">
                         <i class="fas fa-bell"></i></br>Alerts</a>
                 </li>
             </ul>
