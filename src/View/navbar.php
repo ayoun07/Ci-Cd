@@ -10,11 +10,11 @@
                         <i class="fas fa-database"></i></br>Databases</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="backup" href="/Save">
+                    <a class="nav-link" id="backup" href="/Backup">
                         <i class="fas fa-backward"></i></br>Backups</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/restore">
+                    <a class="nav-link" href="/Restorations">
                         <i class="fas fa-trash-can-arrow-up"></i></br>Restorations</a>
                 </li>
                 <li class="nav-item">
