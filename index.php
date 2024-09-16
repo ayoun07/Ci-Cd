@@ -4,12 +4,10 @@ declare (strict_types = 1);
 
 namespace Safebase;
 
-use Safebase\api\tachesCron;
 use Safebase\api\testconnection;
 use Safebase\Controller\AlertController;
 use Safebase\Controller\BackupController;
 use Safebase\controller\CntrlAppli;
-use Safebase\Controller\CronController;
 use Safebase\Controller\DatabaseController;
 use Safebase\Controller\RestoreController;
 use Safebase\dao\DaoAppli;
@@ -28,9 +26,7 @@ $method = strtolower($_SERVER['REQUEST_METHOD']);
 //separe les segments de l'adresse
 $segments = explode('/', trim($route, '/'));
 $cntrl = new CntrlAppli;
-$cntrlCron = new CronController;
 $api = new testconnection;
-$cron = new TachesCron;
 $dao = new DaoAppli;
 $cntrlDb = new DatabaseController;
 $cntrlBackup = new BackupController;
@@ -42,19 +38,28 @@ $cntrlRestore = new RestoreController;
 // routes for databases
 if ($segments[0] == 'database') {
     if ($method=='get'){
-        if (isset($segments[1]) and $segments[1]) {
+        if (isset($segments[1])) {
             // if param:id
             //todo
         } else {
             $cntrlDb->displayDatabase();
         }
     } elseif ($method == "post"){
-        $database = new Database(0);
-        $database->createDatabase();
+        if (isset($segments[2])) {
+            if ($segments[2] == 'create'){
+                $database = new Database();
+                $database->create();
+            } elseif ($segments[2] == 'update'){
+                $database = new Database(intval($segments[3]));
+            }
+        }
     } elseif ($method == "put") {
-
-    } elseif ($method == "DELETE"){
-
+        //methode update to do
+    } elseif ($method == "delete"){
+        $database = new Database();
+        $response = $database->delete($segments[1]);
+        echo json_encode(['message' => $response]);
+        return;
     } 
 } elseif ($segments[0] == 'task') {
     if ($method=='get'){
@@ -73,7 +78,8 @@ if ($segments[0] == 'database') {
         }
 
     } elseif ($method == "DELETE"){
-        $cntrlCron->deleteCron($_GET['id']);
+        $Cron = new Cron(); 
+        $cron->delete($_GET['id']);
     } 
 } elseif ($segments[0] == 'save') {
     $cntrlBackup->displayBackup();

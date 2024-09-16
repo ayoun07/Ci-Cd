@@ -31,7 +31,7 @@ require "navbar.php";
         </div>
     </nav>
     <H1>Ajout d'une base de données</H1>
-    <form action="/database/create" method="post">
+    <!-- <form action="/database/create" method="post"> -->
         <div class="input-group mb-3">
             <label class="form-label" for="name">Nom database: </label><input type="text" id="name" name="name" required>
         </div>
@@ -55,9 +55,14 @@ require "navbar.php";
             <label class="form-label" for="host">URL </label><input type="text" id="host" name="host" required>
         </div>
         <div>
-            <button class="btn btn-primary" type="submit" id="Valider">Valider</button>
+            
+            
+            <button class="btn btn-primary delete"  id="1">Valider</button>
+            <button class="btn btn-primary delete"  id="2">Valider</button>
+            <button class="btn btn-primary delete"  id="3">Valider</button>
+            <button class="btn btn-primary delete"  id="4">Valider</button>
         </div>
-    </form>
+    <!-- </form> -->
 </body>
-
+<script src='/public/js/database.js'></script>
 </html>

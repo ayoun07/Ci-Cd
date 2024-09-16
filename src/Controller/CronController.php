@@ -16,13 +16,10 @@ class CronController
     
     public function createCron(){
          $cron = new Cron();
-         $cron->CreateCron();
+         $cron->Create();
     }
     public function updateCron($id){
         //todo
     }
-    public function deleteCron($id){
-        $cron = new Cron();
-        $cron->deleteCron($id);
-    }
+    
 }
