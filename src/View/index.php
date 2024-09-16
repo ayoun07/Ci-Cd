@@ -94,7 +94,7 @@ require "header.php";
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" type="submit" id="Valider">Save changes</button>
+                                <button type="submit" class="btn btn-primary" id="Valider">Save changes</button>
                             </div>
                         </div>
                     </form>

@@ -47,7 +47,7 @@ if ($segments[0] == 'database') {
     } elseif ($method == "post"){
         $database = new Database();
         $database->create();
-        $cntrlDb->displayDatabase();
+        $cntrl->getIndex();
     } elseif ($method == "put") {
         //methode update to do
     } elseif ($method == "delete"){
