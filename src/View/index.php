@@ -7,6 +7,7 @@ require "header.php";
 <html>
 
 <body>
+    <script src="/public/js/database.js" type="module"></script>
     <div class="container-fluid d-flex">
         <?php require_once("NavBar.php") ?>
         <div class="d-flex flex-column w-100">
@@ -44,7 +45,7 @@ require "header.php";
                                 <td><?= $database['url'] ?></td>
                                 <td><?= $database['used_type'] ?></td>
                                 <td><?= $database['user_database'] ?></td>
-                                <td><button class="btn btn-danger" type="button" onclick="deleteItem()">
+                                <td><button class="btn btn-danger delete" type="button" id="<?= $database['id'] ?>">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </td>

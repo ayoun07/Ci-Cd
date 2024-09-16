@@ -45,16 +45,21 @@ if ($segments[0] == 'database') {
             $cntrl->getIndex();
         }
     } elseif ($method == "post"){
+
         $database = new Database();
         $database->create();
-        $cntrl->getIndex();
+        header('Location: /database');
+        
     } elseif ($method == "put") {
         //methode update to do
     } elseif ($method == "delete"){
         $database = new Database();
         $response = $database->delete($segments[1]);
+        
         echo json_encode(['message' => $response]);
+        
         return;
+
     } 
 } elseif ($segments[0] == 'task') {
     if ($method=='get'){
