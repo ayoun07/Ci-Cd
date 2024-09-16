@@ -4,7 +4,7 @@ namespace Safebase\entity;
 
 use Safebase\dao\DaoAppli;
 
-class Database extends DaoAppli {
+class Database {
     private int $id;
     private string $name;
     private string $password;
@@ -12,7 +12,7 @@ class Database extends DaoAppli {
     private string $port;
     private int $type;
     private string $host;
-
+    private DaoAppli $dao;
     private string $usedType;
 
 public function __construct( 
@@ -33,6 +33,7 @@ public function __construct(
         $this->type = $type;
         $this->usedType = $usedType;
         $this->host = $host;
+        $this->dao = new DaoAppli;
     }
 
     public function getId(): int
@@ -137,7 +138,7 @@ public function __construct(
         return $this;
     }
 
-    public function createDatabase()
+    public function create()
     {
         $database = new Database(name: htmlspecialchars($_POST['name']),
             password: htmlspecialchars($_POST['password']),
@@ -146,10 +147,19 @@ public function __construct(
             host: htmlspecialchars($_POST['host']),
             type: 1,
             usedType: 'prod');
-        $this->createNewBase($database);
+
+        $dao = new DaoAppli;  
+        $this->dao->createNewBase($database);
     } 
     public function listDatabase():array
     {
-        return $this->getListDatabase();
+        return $this->dao->getListDatabase();
+    }
+    public function delete($id):string
+    {
+        if ($this->dao->deleteDatabase($id)){
+            return 'Suppression réalisée avec succès!';
+        } else 
+        return 'echec de la suppression!';
     }
 }

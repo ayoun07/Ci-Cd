@@ -104,7 +104,14 @@ class Cron
         $dao->getListCron();
     } 
 
-    public function CreateCron()
+    public function deleteCron(int $id)
+    {
+       $dao = new DaoAppli;
+       $dao->deleteCron($id);
+
+    }
+
+    public function create()
     {
         $dao = new DaoAppli;
         // format la date de demarrage
@@ -123,9 +130,4 @@ class Cron
         }
     }
 
-    public function deleteCron(int $id)
-    {
-       $dao = new DaoAppli;
-
-    }
 }
