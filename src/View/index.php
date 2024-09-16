@@ -1,7 +1,8 @@
 <?php
 $title = 'Accueil';
-$myDescription = 'Bienvenu dans notre application de SafeBase';
+$myDescription= 'Accueil';
 require "header.php";
+//require "navbar.php";
 ?>
 <html>
 

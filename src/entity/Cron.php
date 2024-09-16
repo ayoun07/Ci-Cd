@@ -3,6 +3,7 @@
 namespace Safebase\entity;
 
 use DateTime;
+use Safebase\dao\DaoAppli;
 
 class Cron
 {
@@ -13,12 +14,12 @@ class Cron
     private ?string $recurrence;
     private ?Database $idDatabase;
 
-    public function __construct(?int $id,
-        ?string $name,
-        ?DateTime $dateStart,
-        ?DateTime $heure,
-        ?string $recurrence,
-        ?Database $idDatabase)
+    public function __construct(?int $id=0,
+        ?string $name ='',
+        ?DateTime $dateStart =null,
+        ?DateTime $heure=null,
+        ?string $recurrence='',
+        ?Database $idDatabase=null)
          {
         $this->id = $id;
         $this->name = $name;
@@ -28,23 +29,11 @@ class Cron
         $this->idDatabase = $idDatabase;
     }
 
-    /**
-     * Get the value of id
-     *
-     * @return int
-     */
     public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * Set the value of id
-     *
-     * @param int $id
-     *
-     * @return self
-     */
     public function setId(int $id): self
     {
         $this->id = $id;
@@ -52,47 +41,22 @@ class Cron
         return $this;
     }
 
-    /**
-     * Get the value of name
-     *
-     * @return ?string
-     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * Set the value of name
-     *
-     * @param ?string $name
-     *
-     * @return self
-     */
     public function setName(?string $name): self
     {
         $this->name = $name;
-
         return $this;
     }
 
-    /**
-     * Get the value of dateStart
-     *
-     * @return ?DateTime
-     */
     public function getDateStart(): ?DateTime
     {
         return $this->dateStart;
     }
 
-    /**
-     * Set the value of dateStart
-     *
-     * @param ?DateTime $dateStart
-     *
-     * @return self
-     */
     public function setDateStart(?DateTime $dateStart): self
     {
         $this->dateStart = $dateStart;
@@ -100,23 +64,11 @@ class Cron
         return $this;
     }
 
-    /**
-     * Get the value of heure
-     *
-     * @return ?DateTime
-     */
     public function getHeure(): ?DateTime
     {
         return $this->heure;
     }
 
-    /**
-     * Set the value of heure
-     *
-     * @param ?DateTime $heure
-     *
-     * @return self
-     */
     public function setHeure(?DateTime $heure): self
     {
         $this->heure = $heure;
@@ -124,51 +76,58 @@ class Cron
         return $this;
     }
 
-    /**
-     * Get the value of recurrence
-     *
-     * @return ?string
-     */
     public function getRecurrence(): ?string
     {
         return $this->recurrence;
     }
 
-    /**
-     * Set the value of recurrence
-     *
-     * @param ?string $recurrence
-     *
-     * @return self
-     */
     public function setRecurrence(?string $recurrence): self
     {
         $this->recurrence = $recurrence;
-
         return $this;
     }
 
-    /**
-     * Get the value of idDatabase
-     *
-     * @return ?Database
-     */
     public function getIdDatabase(): ?Database
     {
         return $this->idDatabase;
     }
 
-    /**
-     * Set the value of idDatabase
-     *
-     * @param ?Database $idDatabase
-     *
-     * @return self
-     */
     public function setIdDatabase(?Database $idDatabase): self
     {
         $this->idDatabase = $idDatabase;
-
         return $this;
     }
+
+    public function listCron()
+    {
+        $dao = new DaoAppli;
+        $dao->getListCron();
+    } 
+
+    public function deleteCron(int $id)
+    {
+       $dao = new DaoAppli;
+       $dao->deleteCron($id);
+
+    }
+
+    public function create()
+    {
+        $dao = new DaoAppli;
+        // format la date de demarrage
+        $dateTime = \DateTime::createFromFormat('Y-m-d', $_POST['datestart']);
+        $time = \DateTime::createFromFormat('H:i', $_POST['heure']);
+       if ($dateTime and $time) {
+            $database = new Database($_POST['iddatabase']);
+            $cron = new Cron(1, $_POST['nom'], $dateTime, $time, $_POST['recurrence'], $database);
+            if ($dao->createNewTask($cron)) {
+                echo ("Tache cron ajoutée avec succès");
+            } else {
+                echo ('echec de l enregistrement');
+            }
+        } else {
+            echo "La conversion a échoué.";
+        }
+    }
+
 }

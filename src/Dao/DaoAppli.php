@@ -8,7 +8,7 @@ use \PDO as PDO;
 class DaoAppli
 {
 
-    private PDO $db;
+    protected PDO $db;
     public function __construct(){
          $this->db = $this->getConnection();
     }
@@ -46,32 +46,46 @@ class DaoAppli
         $statement->bindValue(":used_type",$database->getusedType(),PDO::PARAM_STR);
         $statement->bindValue(":user" ,$database->getuserName(),PDO::PARAM_STR);
         $statement->bindValue(":type_base",$database->gettype(),PDO::PARAM_INT);
+        return $this->tryExecute($statement);
         //On essaie d'ajouter une nouvelle base
-        try {
-            $statement->execute();
-            echo('creation de la base de données');
-            $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            return true;
-        }
-        catch (\PDOException $e) {
-            echo($this::retourneErreur($e->getCode(),$e->getMessage()));
-            return false;
-        }
+        // try {
+        //     $statement->execute();
+        //     $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        //     return true;
+        // }
+        // catch (\PDOException $e) {
+        //     return $e->getMessage();
+        // }
     }
 
-    public function getListType(){
-        $requete = Requete::SEL_TYPE_BASE;
+    
+
+    public function getListDatabase():array{
+        $requete = Requete::SEL_CLIENT_DATABASE;
         $statement = $this->db->query($requete); 
         $data=$statement->fetchAll();
         return $data;
         
     }
 
-    public function getListDatabase(){
-        $requete = Requete::SEL_CLIENT_DATABASE;
-        $statement = $this->db->query($requete); 
+    public function getListCron(){
+        $statement = $this->db->query(Requete::SEL_CRON); 
         $data=$statement->fetchAll();
         return $data;
+        
+    }
+
+    public function deleteDatabase($id){
+        $statement = $this->db->prepare(Requete::DEL_CLIENT_DATABASE);
+        $statement->bindValue(":id",$id,PDO::PARAM_INT);
+        return $this->tryExecute($statement);
+        
+    }
+
+    public function deleteCron($id){
+        $statement = $this->db->prepare(Requete::DEL_TASK_CRON);
+        $statement->bindValue(":id",$id,PDO::PARAM_INT);
+        return $this->tryExecute($statement);
         
     }
 
@@ -86,43 +100,13 @@ class DaoAppli
                 $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $this->createNewBase($type, $host, $port, $db_name, $username, $password);
             } catch (\PDOException $e) {
-                $monErreur = $this::retourneErreur($e->getCode(), $e->getMessage());
-                die($e->getCode() . ":" . $monErreur);
+                return $e;
             }
         }
         echo ($monErreur);
 
         return $this->db;
     }
-
-    public static function retourneErreur($codeErr, $message)
-    {
-
-        if ($codeErr == '23000') {
-            if (strpos($message, 'Integrity') && (strpos($message, 'v_ema'))) {
-                return 'cet email existe déjà!';
-            }
-        
-        } elseif ($codeErr == '1049') {
-            if (strpos($message, 'inconnue')) {
-                return 'Impossible de trouver la base de données!';
-            }
-        } elseif ($codeErr == '1045') {
-            if (strpos($message, 'Accès refusé')) {
-                return 'Utilistateur ou mot de passe inconnu';
-            }
-        } elseif ($codeErr == '2002') {
-            if (strpos($message, 'inconnu')) {
-                return 'Impossible de contacter l URL de la base de données! Veuillez vérifier votre connexion';
-            }
-        } else {
-            return $message;
-        }
-    }
-
-
-
-
 
 
     public function createNewTask($cron): bool
@@ -146,7 +130,17 @@ class DaoAppli
             return true;
         }
         catch (\PDOException $e) {
-            echo($this::retourneErreur($e->getCode(),$e->getMessage()));
+            
+            return $e->getMessage();
+        }
+    }
+    public function tryExecute($statement){
+        try {
+            $statement->execute();
+            $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            return true;
+        }
+        catch (\PDOException $e) {
             return false;
         }
     }
