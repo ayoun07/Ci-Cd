@@ -8,7 +8,7 @@ class DatabaseController extends CntrlAppli
 {
     public function displayDatabase()
     {
-        require 'src/view/nouvelleBase.php';
+        require 'src/view/index.php';
     }
     
 }
