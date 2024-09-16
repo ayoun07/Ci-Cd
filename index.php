@@ -42,17 +42,12 @@ if ($segments[0] == 'database') {
             // if param:id
             //todo
         } else {
-            $cntrlDb->displayDatabase();
+            $cntrl->getIndex();
         }
     } elseif ($method == "post"){
-        if (isset($segments[2])) {
-            if ($segments[2] == 'create'){
-                $database = new Database();
-                $database->create();
-            } elseif ($segments[2] == 'update'){
-                $database = new Database(intval($segments[3]));
-            }
-        }
+        $database = new Database();
+        $database->create();
+        $cntrlDb->displayDatabase();
     } elseif ($method == "put") {
         //methode update to do
     } elseif ($method == "delete"){
