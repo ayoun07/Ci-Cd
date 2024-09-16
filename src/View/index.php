@@ -1,6 +1,6 @@
 <?php
 $title = 'Accueil';
-$myDescription= 'Accueil';
+$myDescription = 'Accueil';
 require "header.php";
 //require "navbar.php";
 ?>
@@ -30,6 +30,7 @@ require "header.php";
                             <th scope="col">URL</th>
                             <th scope="col">Used_type</th>
                             <th scope="col">User-database</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -43,23 +44,12 @@ require "header.php";
                                 <td><?= $database['url'] ?></td>
                                 <td><?= $database['used_type'] ?></td>
                                 <td><?= $database['user_database'] ?></td>
+                                <td><button class="btn btn-danger" type="button" onclick="deleteItem()">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </td>
                             </tr>
                         <?php } ?>
-                        <!--<tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                            <td>@fat</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td colspan="2">Larry the Bird</td>
-                            <td>@twitter</td>
-                            <td>@twitter</td>
-                            <td>@twitter</td>
-                        </tr>-->
                     </tbody>
                 </table>
             </div>
@@ -67,13 +57,13 @@ require "header.php";
             <!-- Modal d'ajout de base de données -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1>Ajout d'une base de données</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="/database/create" method="post">
+                    <form action="/database" method="post">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1>Ajout d'une base de données</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
                                 <div class="input-group mb-3">
                                     <label class="form-label" for="name">Nom database: </label>
                                     <input type="text" id="name" name="name" required>
@@ -101,13 +91,13 @@ require "header.php";
                                     <label class="form-label" for="host">URL: </label>
                                     <input type="text" id="host" name="host" required>
                                 </div>
-                            </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" type="submit" id="Valider">Save changes</button>
+                            </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" type="submit" id="Valider">Save changes</button>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
