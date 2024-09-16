@@ -69,10 +69,23 @@ class DaoAppli
     }
 
     public function getListCron(){
-        $requete = Requete::SEL_CRON;
-        $statement = $this->db->query($requete); 
+        $statement = $this->db->query(Requete::SEL_CRON); 
         $data=$statement->fetchAll();
         return $data;
+        
+    }
+
+    public function deleteDatabase($id){
+        $statement = $this->db->prepare(Requete::DEL_CLIENT_DATABASE);
+        $statement->bindValue(":id",$id,PDO::PARAM_INT);
+        return $this->tryExecute($statement);
+        
+    }
+
+    public function deleteCron($id){
+        $statement = $this->db->prepare(Requete::DEL_TASK_CRON);
+        $statement->bindValue(":id",$id,PDO::PARAM_INT);
+        return $this->tryExecute($statement);
         
     }
 
@@ -128,7 +141,7 @@ class DaoAppli
             return true;
         }
         catch (\PDOException $e) {
-            return $e->getMessage();
+            return false;
         }
     }
 }

@@ -137,7 +137,7 @@ public function __construct(
         return $this;
     }
 
-    public function createDatabase()
+    public function create()
     {
         $database = new Database(name: htmlspecialchars($_POST['name']),
             password: htmlspecialchars($_POST['password']),
@@ -151,5 +151,12 @@ public function __construct(
     public function listDatabase():array
     {
         return $this->getListDatabase();
+    }
+    public function delete($id):string
+    {
+        if ($this->deleteDatabase($id)){
+            return 'Suppression réalisée avec succès!';
+        } else 
+        return 'echec de la suppression!';
     }
 }
