@@ -8,9 +8,9 @@ class Requete {
     public const SEL_CRON = "SELECT t.id, t.nom, recurrence, date_demarrage,ID_database, c.nom as dbase
                             FROM tache_cron t, client_Database c
                             WHERE t.ID_database = c.id";
-    public const SEL_BACKUP = "SELECT t.id id, version,id_database , c.nom as dbase
-    FROM tache_cron t, client_Database c
-    WHERE t.ID_database = c.id";
+    public const SEL_BACKUP = "SELECT b.id id, version,id_database , c.nom as dbase
+                                FROM backup b, client_Database c
+                                WHERE b.ID_database = c.id";
     public const SEL_CLIENT_DATABASE = "SELECT id, nom, password, port, url, used_type, user_database
                                         FROM client_database";
     public const SEL_ALERT = "  SELECT A.id, message, date_execution, nom
