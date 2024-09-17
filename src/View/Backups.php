@@ -6,15 +6,19 @@ require "header.php";
 <html>
 
 <body>
+    <script src="/public/js/database.js" type="module"></script>
     <div class="container-fluid d-flex">
         <?php require_once "NavBar.php" ?>
         <div class="d-flex flex-column w-100">
             <!-- Container pour le titre et le bouton -->
             <div class="d-flex justify-content-between mb-3">
-                <h1 class="titre">Backups</h1>
+                <h1 class="titre">Databases</h1>
                 <!-- Bouton placé à l'extrême droite et légèrement en bas du titre -->
                 <button type="button" id="btnajout" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary w-10">
                     Create backup +
+                </button>
+                <button type="button" id="btnajout" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-secondary w-10">
+                    Create task +
                 </button>
             </div>
 
@@ -84,13 +88,13 @@ require "header.php";
                                 <div>
                                     <button type="submit" id="Valider">Valider</button>
                                 </div>
-                            </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary" id="Valider">Save changes</button>
+                            </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" type="submit" id="Valider">Save changes</button>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
