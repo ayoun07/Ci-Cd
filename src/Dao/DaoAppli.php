@@ -74,6 +74,15 @@ class DaoAppli
         return $data;
         
     }
+    
+    public function getListBackup(){
+        $statement = $this->db->query(Requete::SEL_BACKUP); 
+        $data=$statement->fetchAll();
+        return $data;
+        
+    }
+
+
 
     public function deleteDatabase($id){
         $statement = $this->db->prepare(Requete::DEL_CLIENT_DATABASE);

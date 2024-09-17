@@ -8,6 +8,7 @@ use Safebase\api\testconnection;
 use Safebase\Controller\AlertController;
 use Safebase\Controller\BackupController;
 use Safebase\controller\CntrlAppli;
+use Safebase\Controller\CronController;
 use Safebase\Controller\DatabaseController;
 use Safebase\Controller\RestoreController;
 use Safebase\dao\DaoAppli;
@@ -67,7 +68,7 @@ if ($segments[0] == 'database') {
             // if param:id
             //todo
         } else {
-            
+            $cntrlCron = new CronController;
             $cntrlCron->displayCron();
         }
     } elseif ($method == "post"){
