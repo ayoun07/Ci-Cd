@@ -24,25 +24,16 @@ require "header.php";
                     <thead>
                         <tr>
                             <th scope="col">Id</th>
-                            <th scope="col">Nom</th>
-                            <th scope="col">Port</th>
-                            <th scope="col">URL</th>
-                            <th scope="col">Used_type</th>
-                            <th scope="col">User-database</th>
-                            <th scope="col"></th>
+                            <th scope="col">Database</th>
+                            <th scope="col">Version</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($backups as $backup) { ?>
-
-
                             <tr>
                                 <th scope="row"><?= $backup['id'] ?></th>
-                                <td><?= $backup['database'] ?></td>
+                                <td><?= $backup['dbase'] ?></td>
                                 <td><?= $backup['version'] ?></td>
-                                <td><?= $backup['url'] ?></td>
-                                <td><?= $backup['used_type'] ?></td>
-                                <td><?= $database['user_database'] ?></td>
                                 <td><button class="btn btn-danger delete" type="button" id="<?= $database['id'] ?>">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>

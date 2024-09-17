@@ -71,7 +71,8 @@ if ($segments[0] == 'database') {
             $cntrlCron->displayCron();
         }
     } elseif ($method == "post"){
-        $cntrlCron->createCron();
+        $cron = new Cron();
+        $cron->create();
     } elseif ($method == "put") {
         if (isset($segments[2])){
             $cntrlCron->updateCron($segments[2]);
