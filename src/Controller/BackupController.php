@@ -10,6 +10,7 @@ class BackupController extends CntrlAppli
     {
         $dao = new DaoAppli;
         $backups = $dao->getListBackup();
+        $databases = $dao->getListDatabase();
         require 'src/view/Backups.php';
     }
     

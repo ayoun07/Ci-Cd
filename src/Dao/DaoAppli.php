@@ -17,7 +17,7 @@ class DaoAppli
         $host       = "localhost";
         $db_name    = "safebase";
         $username   = "root";
-        $password   = "toto";
+        $password   = "password";
 
         if (!isset($this->db)) {
             try {
@@ -37,10 +37,10 @@ class DaoAppli
         
         $statement = $this->db->prepare($requete);
 
-        $passwordHash=password_hash($database->getpassword(),PASSWORD_DEFAULT);
+        //$passwordHash=password_hash($database->getpassword(),PASSWORD_DEFAULT);
 
         $statement->bindValue(":nom",$database->getname(),PDO::PARAM_STR);
-        $statement->bindValue(":password",$passwordHash,PDO::PARAM_STR);
+        $statement->bindValue(":password",$database->getpassword(),PDO::PARAM_STR);
         $statement->bindValue(":port",$database->getport(),PDO::PARAM_STR);
         $statement->bindValue(":url",$database->gethost(),PDO::PARAM_STR);
         $statement->bindValue(":used_type",$database->getusedType(),PDO::PARAM_STR);
@@ -85,9 +85,19 @@ class DaoAppli
 
 
     public function deleteDatabase($id){
+        
         $statement = $this->db->prepare(Requete::DEL_CLIENT_DATABASE);
-        $statement->bindValue(":id",$id,PDO::PARAM_INT);
+        $statement->bindValue(":id",intval($id),PDO::PARAM_INT);
         return $this->tryExecute($statement);
+        
+    }
+
+    public function selectDatabaseById($id){
+        $statement = $this->db->prepare(Requete::SEL_DB_BY_ID);
+        $statement->bindValue(":id",$id,PDO::PARAM_INT);
+        $statement->execute();
+        $data=$statement->fetchAll();
+        return $data;
         
     }
 
@@ -130,7 +140,7 @@ class DaoAppli
         $statement->bindValue(":recurrence",$cron->getRecurrence(),PDO::PARAM_STR);
         $statement->bindValue(":date_demarrage",$dateString,PDO::PARAM_STR);
         $statement->bindValue(":heure",$timeString,PDO::PARAM_STR);
-        $statement->bindValue(":ID_DATABASE",$cron->getIdDatabase()->getId(),PDO::PARAM_STR);
+        $statement->bindValue(":ID_DATABASE",$cron->getDatabase()->getId(),PDO::PARAM_STR);
         //On essaie d'ajouter une nouvelle base
         try {
             $statement->execute();

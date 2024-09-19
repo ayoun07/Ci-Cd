@@ -2,7 +2,8 @@
 
 // Chemin complet vers l'exécutable PHP et le script PHP
 $phpPath = 'C:\wamp64\bin\php\php8.2.0\php.exe';
-$scriptPath = 'C:\wamp64\www\safebase\src\api\cronPHP\job1.php';
+//$scriptPath = 'C:\wamp64\www\safebase\src\api\cronPHP\job1.php';
+$scriptPath = 'C:\wamp64\www\safeBase\src\dumpationgres\index.php';
 
 // Vérifie si le système d'exploitation est Windows
 if (PHP_OS === "WINNT") {
@@ -10,7 +11,7 @@ if (PHP_OS === "WINNT") {
     echo 'Création de la tâche cron sous Windows via PHP...';   
 
     // Commande pour créer la tâche cron
-    $command = "schtasks /create /tn \"testCronPHP\" /tr \"$phpPath $scriptPath\" /sc daily /st 11:56";
+    $command = "schtasks /create /tn \"testCronPHP\" /tr \"$phpPath $scriptPath\" /sc minute /mo 1";
 
     // Exécute la commande
     exec($command, $output, $result);

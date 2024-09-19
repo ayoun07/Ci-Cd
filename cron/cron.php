@@ -11,7 +11,7 @@ if (PHP_OS === "WINNT") {
 
     // Commande pour créer la tâche cron
     // $command = "schtasks /create /tn \"testCronPHP\" /tr \"$phpPath $scriptPath\" /sc daily /st 19:45";
-    $command = "schtasks /create /tn \""  . $taskCron .  "\" /tr \"$phpPath $scriptPath\" /sc minute /mo 1 /st 12:00";
+    $command = "schtasks /create /tn \""  . $taskCron .  "\" /tr \"$phpPath $scriptPath\" /sc  /mo 1 /st 12:00";
     // équivalent à 45 19 * * * d'une tâche CRON
     // Exécute la commande
     exec($command, $output, $result);

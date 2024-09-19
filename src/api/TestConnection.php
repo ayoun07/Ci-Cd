@@ -8,6 +8,7 @@ class testconnection
     public function test($type, $host, $port, $db_name, $username, $password):bool
     // public function test()
     {
+        $type='mysql';
         $dao = new DaoAppli;
         if ($port == 'default') {
             if ($type == 'mysql') {
@@ -18,6 +19,11 @@ class testconnection
         }
 
         $dao->tryConnection($type, $host, $port, $db_name, $username, $password);
+
+    
+
+
+        
         $date = date("Y-m-d_H-i-s");
         $dump_name = $db_name . '_' . $date . '.sql';
         $root_path = $_SERVER['DOCUMENT_ROOT'];
@@ -40,12 +46,17 @@ class testconnection
             // pg_dump -U utilisateur -h hôte -p port nom_de_la_base > fichier_de_dump.sql
             $commande = 'set PGPASSWORD=toto&& pg_dump -U ' . $username . ' -h ' . $host . ' -p' . $port . ' ' . $db_name . ' > ' . $ExportPath . '';
         }
-        echo ($commande);
+        echo ('type');
+        echo $type;
+        echo('<BR>');
+        echo ('commande');
+        echo $commande;
+        
         exec($commande, $output, $result);
         echo ('<hr><pre>');
         echo "Code de résultat : " . $result . PHP_EOL;
         echo "Sortie de la commande (output) : " . PHP_EOL;
-        var_dump($output);
+        // var_dump($output);
         echo ('</pre>');
 
         switch ($result) {
@@ -63,9 +74,9 @@ class testconnection
         }
 
 
-        echo ('<hr><pre>');
-        var_dump($GLOBALS);
-        echo ('</pre>');
+        // echo ('<hr><pre>');
+        // var_dump($GLOBALS);
+        // echo ('</pre>');
         return $isOk;
     }
 }

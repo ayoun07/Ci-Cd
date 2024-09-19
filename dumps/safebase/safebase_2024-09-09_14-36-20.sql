@@ -26,9 +26,9 @@ CREATE TABLE `alert` (
   `id` int NOT NULL AUTO_INCREMENT,
   `message` varchar(255) DEFAULT NULL,
   `date_execution` varchar(50) NOT NULL,
-  `FK_DATABASE` int NOT NULL,
+  `ID_DATABASE` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_DATABASE` (`FK_DATABASE`)
+  KEY `ID_DATABASE` (`ID_DATABASE`)
 ) ENGINE=InnoDB   DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -51,9 +51,9 @@ DROP TABLE IF EXISTS `backup`;
 CREATE TABLE `backup` (
   `id` int NOT NULL AUTO_INCREMENT,
   `version` datetime NOT NULL,
-  `FK_DATABASE` int NOT NULL,
+  `ID_DATABASE` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_DATABASE` (`FK_DATABASE`)
+  KEY `ID_DATABASE` (`ID_DATABASE`)
 ) ENGINE=InnoDB   DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -81,9 +81,9 @@ CREATE TABLE `client_database` (
   `url` varchar(255) NOT NULL,
   `port` int DEFAULT NULL,
   `used_type` varchar(255) NOT NULL,
-  `FK_Type` int NOT NULL,
+  `ID_TYPE` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_Type` (`FK_Type`)
+  KEY `ID_TYPE` (`ID_TYPE`)
 ) ENGINE=InnoDB   DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -109,9 +109,9 @@ CREATE TABLE `tache_cron` (
   `recurrence` varchar(50) NOT NULL,
   `date_demarrage` date DEFAULT NULL,
   `heure` time DEFAULT NULL,
-  `FK_DATABASE` int NOT NULL,
+  `ID_DATABASE` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_DATABASE` (`FK_DATABASE`)
+  KEY `ID_DATABASE` (`ID_DATABASE`)
 ) ENGINE=InnoDB   DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

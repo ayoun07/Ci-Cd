@@ -49,7 +49,9 @@ if ($segments[0] == 'database') {
 
         $database = new Database();
         $database->create();
+
         header('Location: /database');
+    
         
     } elseif ($method == "put") {
         //methode update to do
@@ -58,9 +60,7 @@ if ($segments[0] == 'database') {
         $response = $database->delete($segments[1]);
         
         echo json_encode(['message' => $response]);
-        
         return;
-
     } 
 } elseif ($segments[0] == 'task') {
     if ($method=='get'){

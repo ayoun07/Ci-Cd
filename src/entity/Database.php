@@ -162,4 +162,9 @@ public function __construct(
         } else 
         return 'echec de la suppression!';
     }
+    public function getDataById($id):array
+    {
+        return $this->dao->selectDatabaseById($id);
+        
+    }
 }

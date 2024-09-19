@@ -13,12 +13,14 @@ class Requete {
                                 WHERE b.ID_database = c.id";
     public const SEL_CLIENT_DATABASE = "SELECT id, nom, password, port, url, used_type, user_database
                                         FROM client_database";
+    public const SEL_DB_BY_ID = "SELECT id, nom, password, port, url, used_type, user_database, id_type
+                                        FROM client_database WHERE id= :id";
     public const SEL_ALERT = "  SELECT A.id, message, date_execution, nom
                                 FROM alert A, client_database C
                                 WHERE ID_DATABASE=  C.id";
     // Requetes d'insertion
     public const INS_DATABASE = "INSERT INTO client_database
-         (nom,password, port,url, used_type, user_database, FK_Type)
+         (nom,password, port,url, used_type, user_database, ID_Type)
         values(:nom, :password, :port, :url,:used_type, :user, :type_base)";
     public const INS_CRON = "INSERT INTO `tache_cron`(`nom`, `recurrence`, `date_demarrage`, `heure`, `ID_DATABASE`) 
                              VALUES (:nom, :recurrence, :date_demarrage, :heure,:ID_DATABASE)";

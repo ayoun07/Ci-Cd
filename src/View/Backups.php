@@ -57,33 +57,27 @@ require "header.php";
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="/cron/create" method="post">
+                            <form action="/task/create" method="post">
                                 <div>
                                     <label for="nom">Nom de la tache: </label><input type="text" id="nom" name="nom" required>
                                     <div>
 
-                                        <label for="iddatabase">Type de base de données :</label>
-                                        <select name="nom" id="type">
+                                        <label for="iddatabase">Base de données :</label>
+                                        <select name="iddatabase" id="iddatabase">
                                             <?php foreach ($databases as $database) { ?>
                                                 <option value=" <?= $database['id'] ?>"><?= $database['nom'] ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>
-
-
-
                                 </div>
                                 <div>
-                                    <label for="iddatabase">Nom database: </label><input type="text" id="iddatabase" name="iddatabase" required>
+                                    <label for="datestart">Date de démarrage </label><input type="date" id="datestart" name="datestart" required>
                                 </div>
                                 <div>
-                                    <label for="datestart">Date de démarrage </label><input type="text" id="datestart" name="datestart" required>
+                                    <label for="heure">Heure: </label><input type="time" id="heure" name="heure" required>
                                 </div>
                                 <div>
-                                    <label for="heure">Heure: </label><input type="text" id="heure" name="heure" required>
-                                </div>
-                                <div>
-                                    <label for="port">Port: </label><input type="text" id="port" name="port" required>
+                                    <label for="recurrence">Récurrence: </label><input type="text" id="recurrence" name="recurrence" required>
                                 </div>
                                 <div>
                                     <button type="submit" id="Valider">Valider</button>
