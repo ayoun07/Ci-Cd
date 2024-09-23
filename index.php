@@ -4,6 +4,7 @@ declare (strict_types = 1);
 
 namespace Safebase;
 
+use Backup;
 use Safebase\api\testconnection;
 use Safebase\Controller\AlertController;
 use Safebase\Controller\BackupController;
@@ -59,7 +60,18 @@ if ($segments[0] == 'database') {
         echo json_encode(['message' => $response]);
         return;
     } 
-} elseif ($segments[0] == 'task') {
+} elseif ($segment[0] == 'backup'){
+    if ($method == 'delete'){
+        // Delete backup
+
+        $backup = new Backup();
+        $response = $backup->delete($segments[1]);
+        
+        echo json_encode(['message' => $response]);
+        return;
+    }
+}
+elseif ($segments[0] == 'task') {
     if ($method=='get'){
         if (isset($segments[1]) and $segments[1]) {
             // if param:id

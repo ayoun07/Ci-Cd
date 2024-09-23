@@ -130,6 +130,13 @@ class DaoAppli
         
     }
 
+    public function deleteBackup($id){
+        $statement = $this->db->prepare(Requete::DEL_BACKUP);
+        $statement->bindValue(":id",$id,PDO::PARAM_INT);
+        return $this->tryExecute($statement);
+        
+    }
+
     public function createBackup($id, $version)
     {
         $statement = $this->db->prepare(Requete::INS_BACKUP);

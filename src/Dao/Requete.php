@@ -30,6 +30,7 @@ public const INS_BACKUP = "INSERT INTO backup(id_database, version)
    // Requetes de suppression
    public const DEL_CLIENT_DATABASE = "DELETE FROM client_database WHERE id= :id"; 
    public const DEL_ALERT = "DELETE FROM alert WHERE id= :id";
+   public const DEL_BACKUP = "DELETE FROM backup WHERE id= :id";
    public const DEL_TASK_CRON = "DELETE FROM tache_cron WHERE id= :id";
     
 }
