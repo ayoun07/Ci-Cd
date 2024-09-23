@@ -60,7 +60,7 @@ if ($segments[0] == 'database') {
         echo json_encode(['message' => $response]);
         return;
     } 
-} elseif ($segment[0] == 'backup'){
+} elseif ($segments[0] == 'backup'){
     if ($method == 'delete'){
         // Delete backup
 
