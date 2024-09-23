@@ -3,25 +3,25 @@ namespace Safebase\api;
 
 use Safebase\dao\DaoAppli;
 
-class testconnection
+class TestConnection
 {
-    public function test($type, $host, $port, $db_name, $username, $password):bool
-    // public function test()
+    public function test($database):bool
     {
         $type='mysql';
         $dao = new DaoAppli;
-        if ($port == 'default') {
-            if ($type == 'mysql') {
-                $port = '3306';
+        if ($database->getPort() == 'default') {
+            if ($database->getType()->getName() == 'mysql') {
+                $database->setPort('3306');
             } else {
-                $port = '5432';
+                $database->setPort('5432');
             }
         }
-
-        $dao->tryConnection($type, $host, $port, $db_name, $username, $password);
-
-    
-
+        $dao->tryConnection($database);
+        $db_name = $database ->getName();
+        $port = $database->getPort();
+        $host = $database->getHost();
+        $username = $database->getUserName();
+        $password = $database->getPassword();
 
         
         $date = date("Y-m-d_H-i-s");
@@ -63,6 +63,7 @@ class testconnection
             case 0:
                 echo 'La base de données <b>' . $db_name . '</b> a été sauvegardée avec succès dans le chemin suivant : ' . getcwd() . '/' . $ExportPath;
                 $isOk = true;
+                $dao->createBackup($database->getId(),$dump_name);
                 break;
             case 1:
                 $isOk=false;

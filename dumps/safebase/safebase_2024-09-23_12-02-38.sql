@@ -28,8 +28,8 @@ CREATE TABLE `alert` (
   `date_execution` varchar(50) NOT NULL,
   `ID_DATABASE` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `ID_DATABASE` (`ID_DATABASE`)
-) ENGINE=InnoDB   DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `FK_DATABASE` (`ID_DATABASE`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,6 +38,7 @@ CREATE TABLE `alert` (
 
 LOCK TABLES `alert` WRITE;
 /*!40000 ALTER TABLE `alert` DISABLE KEYS */;
+INSERT INTO `alert` VALUES (1,'Echec de la sauvegarde','2024-09-12',1),(2,'DUMP REUSSI','2024-09-12',2),(3,'DUMP REUSSI','2024-09-12',3),(4,'DUMP REUSSI','2024-09-12',4);
 /*!40000 ALTER TABLE `alert` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -50,11 +51,11 @@ DROP TABLE IF EXISTS `backup`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `backup` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `version` datetime NOT NULL,
+  `version` varchar(50) NOT NULL,
   `ID_DATABASE` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `ID_DATABASE` (`ID_DATABASE`)
-) ENGINE=InnoDB   DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `FK_DATABASE` (`ID_DATABASE`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -81,10 +82,11 @@ CREATE TABLE `client_database` (
   `url` varchar(255) NOT NULL,
   `port` int DEFAULT NULL,
   `used_type` varchar(255) NOT NULL,
-  `ID_TYPE` int NOT NULL,
+  `ID_Type` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `ID_TYPE` (`ID_TYPE`)
-) ENGINE=InnoDB   DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `FK_Type` (`ID_Type`),
+  CONSTRAINT `client_database_ibfk_1` FOREIGN KEY (`ID_Type`) REFERENCES `type` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,6 +95,7 @@ CREATE TABLE `client_database` (
 
 LOCK TABLES `client_database` WRITE;
 /*!40000 ALTER TABLE `client_database` DISABLE KEYS */;
+INSERT INTO `client_database` VALUES (44,'echangeJeune','toto','root','localhost',0,'prod',1),(45,'echangeJeune','sdfgh','sdfg','localhost',0,'prod',1),(46,'echangeJeune','dfg','sdf','dfg',0,'prod',1),(47,'safebase','toto','root','localhost',0,'prod',1),(48,'safebase','toto','root','localhost',0,'prod',1),(49,'safebase','toto','root','localhost',0,'prod',1);
 /*!40000 ALTER TABLE `client_database` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -111,8 +114,9 @@ CREATE TABLE `tache_cron` (
   `heure` time DEFAULT NULL,
   `ID_DATABASE` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `ID_DATABASE` (`ID_DATABASE`)
-) ENGINE=InnoDB   DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `FK_DATABASE` (`ID_DATABASE`),
+  CONSTRAINT `tache_cron_ibfk_1` FOREIGN KEY (`ID_DATABASE`) REFERENCES `client_database` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -121,6 +125,7 @@ CREATE TABLE `tache_cron` (
 
 LOCK TABLES `tache_cron` WRITE;
 /*!40000 ALTER TABLE `tache_cron` DISABLE KEYS */;
+INSERT INTO `tache_cron` VALUES (37,'echange','journaliere','2024-09-23','14:00:00',47),(38,'echange','journaliere','2024-09-23','14:00:00',47),(39,'echange','journaliere','2024-09-23','14:00:00',47),(40,'echange','journaliere','2024-09-23','14:00:00',47);
 /*!40000 ALTER TABLE `tache_cron` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -136,7 +141,7 @@ CREATE TABLE `type` (
   `nom` varchar(50) NOT NULL,
   `version` decimal(15,2) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB   DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -145,6 +150,7 @@ CREATE TABLE `type` (
 
 LOCK TABLES `type` WRITE;
 /*!40000 ALTER TABLE `type` DISABLE KEYS */;
+INSERT INTO `type` VALUES (1,'mysql',8.00);
 /*!40000 ALTER TABLE `type` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -157,4 +163,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-09-09 16:36:20
+-- Dump completed on 2024-09-23 14:02:38

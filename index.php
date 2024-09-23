@@ -23,7 +23,6 @@ require_once __DIR__ . '/vendor/autoload.php';
 $uri = $_SERVER['REQUEST_URI'];
 $route = explode('?', $uri)[0];
 $method = strtolower($_SERVER['REQUEST_METHOD']);
-
 //separe les segments de l'adresse
 $segments = explode('/', trim($route, '/'));
 $cntrl = new CntrlAppli;
@@ -49,8 +48,6 @@ if ($segments[0] == 'database') {
 
         $database = new Database();
         $database->create();
-
-        header('Location: /database');
     
         
     } elseif ($method == "put") {

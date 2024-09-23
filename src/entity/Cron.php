@@ -110,19 +110,12 @@ class Cron
        if ($dateTime and $time) {
             // $this->database->setId($_POST['iddatabase']);
             // $database = new Database();
-            echo 'maBase';
-            $mabase= $this->database->getDataById($_POST['iddatabase']);
+            $this->database = $this->database->getDataById($_POST['iddatabase']);
             $cron = new Cron(1, $_POST['nom'], $dateTime, $time, $_POST['recurrence'], $this->database);
             if ($dao->createNewTask($cron)) {
-                echo ("Tache cron ajoutée avec succès");
         
-                $CreateDump = new testconnection();
-                $CreateDump->test($mabase[0]['id_type'],
-                $mabase[0]['url'],
-                $mabase[0]['port'],
-                $mabase[0]['nom'],
-                $mabase[0]['user_database'],
-                $mabase[0]['password']);
+                $CreateDump = new Testconnection();
+                $CreateDump->test($this->database);
                 }
              else {
                 echo ('echec de l enregistrement');

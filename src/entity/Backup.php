@@ -7,10 +7,8 @@ class Buckup
     private int $id;
     private ?string $version;
     private ?Database $idDatabase;
-    private ?string $name;
 
     public function __construct(?int $id,
-        ?string $name,
         ?string $version,
         ?Database $idDatabase)
          {
@@ -87,31 +85,6 @@ class Buckup
     public function setIdDatabase(?Database $idDatabase): self
     {
         $this->idDatabase = $idDatabase;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of name
-     *
-     * @return ?string
-     */
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set the value of name
-     *
-     * @param ?string $name
-     *
-     * @return self
-     */
-    public function setName(?string $name): self
-    {
-        $this->name = $name;
-
         return $this;
     }
 }
