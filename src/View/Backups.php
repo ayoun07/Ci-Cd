@@ -6,13 +6,13 @@ require "header.php";
 <html>
 
 <body>
-    <script src="/public/js/database.js" type="module"></script>
+    <script src="/public/js/backup.js" type="module"></script>
     <div class="container-fluid d-flex">
         <?php require_once "NavBar.php" ?>
         <div class="d-flex flex-column w-100">
             <!-- Container pour le titre et le bouton -->
             <div class="d-flex justify-content-between mb-3">
-                <h1 class="titre">Databases</h1>
+                <h1 class="titre">Backups</h1>
                 <!-- Bouton placé à l'extrême droite et légèrement en bas du titre -->
                 <button type="button" id="btnajout" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary w-10">
                     Create backup +
@@ -28,8 +28,9 @@ require "header.php";
                     <thead>
                         <tr>
                             <th scope="col">Id</th>
-                            <th scope="col">Database</th>
+                            <th scope="col">Backup</th>
                             <th scope="col">Version</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,7 +39,7 @@ require "header.php";
                                 <th scope="row"><?= $backup['id'] ?></th>
                                 <td><?= $backup['dbase'] ?></td>
                                 <td><?= $backup['version'] ?></td>
-                                <td><button class="btn btn-danger delete" type="button" id="<?= $database['id'] ?>">
+                                <td><button class="btn btn-danger delete" type="button" id="<?= $backup['id'] ?>">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </td>
@@ -79,13 +80,10 @@ require "header.php";
                                 <div>
                                     <label for="recurrence">Récurrence: </label><input type="text" id="recurrence" name="recurrence" required>
                                 </div>
-                                <div>
-                                    <button type="submit" id="Valider">Valider</button>
-                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary" id="Valider">Save changes</button>
+                                <button type="submit" class="btn btn-success" id="Valider">Save changes</button>
                             </div>
                         </div>
                     </form>

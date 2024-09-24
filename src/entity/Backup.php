@@ -2,6 +2,8 @@
 
 namespace Safebase\entity;
 
+use Safebase\dao\DaoAppli;
+
 class Buckup
 {
     private int $id;
@@ -87,4 +89,12 @@ class Buckup
         $this->idDatabase = $idDatabase;
         return $this;
     }
+
+    public function deleteBackup(int $id)
+    {
+        $dao = new DaoAppli;
+        $file =$dao->deleteBackup($id);
+        $command = "Del \ ";
+    }
+    
 }

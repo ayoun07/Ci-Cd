@@ -63,7 +63,7 @@ if ($segments[0] == 'database') {
 } elseif ($segments[0] == 'backup'){
     if ($method == 'delete'){
         // Delete backup
-
+        
         $backup = new Backup();
         $response = $backup->delete($segments[1]);
         

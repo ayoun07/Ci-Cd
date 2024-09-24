@@ -1,5 +1,5 @@
 <?php
-
+echo('hello');
 // Chemin complet vers l'exécutable PHP et le script PHP
 $phpPath = 'C:\wamp64\bin\php\php8.2.0\php.exe';
 //$scriptPath = 'C:\wamp64\www\safebase\src\api\cronPHP\job1.php';

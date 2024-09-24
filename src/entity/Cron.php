@@ -116,6 +116,7 @@ class Cron
         
                 $CreateDump = new Testconnection();
                 $CreateDump->test($this->database);
+                require_once 'cronExec.php';
                 }
              else {
                 echo ('echec de l enregistrement');
