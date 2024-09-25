@@ -1,5 +1,5 @@
 \backup\
-/vendor/
+\vendor\
 
 composer.json
 composer.lock

@@ -4,7 +4,7 @@ declare (strict_types = 1);
 
 namespace Safebase;
 
-use Backup;
+use Safebase\entity\Backup;
 use Safebase\api\testconnection;
 use Safebase\Controller\AlertController;
 use Safebase\Controller\BackupController;
@@ -63,9 +63,9 @@ if ($segments[0] == 'database') {
 } elseif ($segments[0] == 'backup'){
     if ($method == 'delete'){
         // Delete backup
-        
+
         $backup = new Backup();
-        $response = $backup->delete($segments[1]);
+        $response = $backup->deleteBackup(intVal($segments[1]));
         
         echo json_encode(['message' => $response]);
         return;

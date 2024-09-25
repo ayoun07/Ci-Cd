@@ -4,15 +4,15 @@ namespace Safebase\entity;
 
 use Safebase\dao\DaoAppli;
 
-class Buckup
+class Backup
 {
-    private int $id;
+    private ?int $id;
     private ?string $version;
     private ?Database $idDatabase;
 
-    public function __construct(?int $id,
-        ?string $version,
-        ?Database $idDatabase)
+    public function __construct(?int $id=0,
+        ?string $version='',
+        ?Database $idDatabase= new database())
          {
         $this->id = $id;
         $this->version = $version;
