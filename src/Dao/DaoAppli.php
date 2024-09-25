@@ -16,10 +16,10 @@ class DaoAppli
     }
     //On essai de se connecter à la base de données
     private function getConnection() {
-        $host       = "localhost";
+        $host       = "mysql";
         $db_name    = "safebase";
-        $username   = "root";
-        $password   = "toto";
+        $username   = "user";
+        $password   = "password";
 
         if (!isset($this->db)) {
             try {
