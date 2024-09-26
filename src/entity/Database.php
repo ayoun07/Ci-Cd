@@ -10,18 +10,19 @@ class Database {
     private string $name;
     private string $password;
     private string $userName;
-    private string $port;
+    private int $port;
     private Type $type;
     private string $host;
     private DaoAppli $dao;
     private string $usedType;
+
 
 public function __construct( 
         int $id = 0,
         string $name = '',
         string $password = '',
         string $userName = '',
-        string $port = '3306',
+        int $port = 3306,
         Type $type = new Type(1,'mysql'),
         string $usedType = 'prod',
         string $host = 'localhost'
@@ -92,7 +93,7 @@ public function __construct(
     }
 
     
-    public function getPort(): string
+    public function getPort(): int
     {
         return $this->port;
     }
@@ -145,7 +146,7 @@ public function __construct(
         $database = new Database(name: htmlspecialchars($_POST['name']),
             password: htmlspecialchars($_POST['password']),
             userName: htmlspecialchars($_POST['user']),
-            port: htmlspecialchars($_POST['port']),
+            port: intval(htmlspecialchars($_POST['port'])),
             host: htmlspecialchars($_POST['host']),
             type: $type,
             usedType: 'prod');
@@ -155,8 +156,9 @@ public function __construct(
             echo "echec de l'ajout";
             $cntrlAppli = new CntrlAppli();
             $cntrlAppli->getIndex();
-        } else {
-            header('Location: /database');
+        // Ne pas utiliser avec Docker
+        // } else {
+        //     header('Location: /database');
         }
     } 
     public function listDatabase():array

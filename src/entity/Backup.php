@@ -94,7 +94,7 @@ class Backup
     {
         $dao = new DaoAppli;
         $file =$dao->deleteBackup($id);
-        $command = "Del \ ";
+        //$command = "Del \ ";
     }
     
 }

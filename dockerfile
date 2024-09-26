@@ -8,27 +8,31 @@ RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     git \
     unzip \
+    libzip-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd \
-    && docker-php-ext-install pdo pdo_mysql mysqli \
-    && docker-php-ext-install opcache \
-    && docker-php-ext-enable opcache
-
-# Définir le répertoire de travail
-WORKDIR /var/www/html
+    && docker-php-ext-install pdo pdo_mysql mysqli zip
 
 # Installer Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Enable Apache modules
-RUN a2enmod rewrite
-RUN a2enmod headers
+# Définir le répertoire de travail
+WORKDIR /var/www/html
 
-# Copier la configuration VirtualHost dans Apache
-COPY ./virtualhost.conf /etc/apache2/sites-available/000-default.conf
+# Copier le fichier composer.json
+COPY ./composer.json /var/www/html
+
+# Copier les fichiers du projet
+COPY ./ /var/www/html
 
 # Installer les dépendances PHP via Composer
 RUN composer install
+
+# Configurer Apache pour définir ServerName
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+
+#Configuration de la réécriture de l'URL d'apache
+RUN a2enmod rewrite
 
 # Exposer le port 80
 EXPOSE 80

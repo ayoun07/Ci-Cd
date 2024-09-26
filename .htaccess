@@ -1,0 +1,23 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Redirection pour /save
+    RewriteRule ^Save$ Backups.php [QSA,L]
+
+    # Redirection dynamique pour /save/<id>
+    RewriteRule ^Save/([0-9]+)$ Backups.php?id=$1 [QSA,L]
+
+    # Redirection pour /restore
+    RewriteRule ^restore$ Restorations.php [QSA,L]
+
+    # Redirection dynamique pour /restore/<id>
+    RewriteRule ^restore/([0-9]+)$ Restorations.php?id=$1 [QSA,L]
+
+    # Redirection pour /alert
+    RewriteRule ^alert$ Alerts.php [QSA,L]
+
+    # Redirection générale pour toutes les autres routes
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php [QSA,L]
+</IfModule>
