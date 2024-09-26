@@ -31,5 +31,8 @@ RUN composer install
 # Configurer Apache pour définir ServerName
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
+#Configuration de la réécriture de l'URL d'apache
+RUN a2enmod rewrite
+
 # Exposer le port 80
 EXPOSE 80
