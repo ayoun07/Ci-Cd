@@ -9,8 +9,8 @@ class Requete {
                             FROM tache_cron t, client_Database c
                             WHERE t.ID_database = c.id";
     public const SEL_BACKUP = "SELECT b.id id, version,id_database , c.nom as dbase
-                                FROM backup b, client_Database c
-                                WHERE b.ID_database = c.id";
+                                FROM backup b, client_database c
+                                WHERE b.id_database = c.id";
     public const SEL_CLIENT_DATABASE = "SELECT id, nom, password, port, url, used_type, user_database
                                         FROM client_database";
     public const SEL_DB_BY_ID = "SELECT C.id as id, C.nom as nom, password, port, url, used_type, user_database, id_type, T.nom as name_type

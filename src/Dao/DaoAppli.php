@@ -36,7 +36,7 @@ class DaoAppli
     public function createNewBase($database): bool
     { 
         $connected = $this->tryConnection($database); 
-        var_dump($connected);
+        
         if ($connected){
             $requete = Requete::INS_DATABASE;
             
@@ -46,7 +46,7 @@ class DaoAppli
 
             $statement->bindValue(":nom",$database->getName(),PDO::PARAM_STR);
             $statement->bindValue(":password",$database->getPassword(),PDO::PARAM_STR);
-            $statement->bindValue(":port",$database->getPort(),PDO::PARAM_STR);
+            $statement->bindValue(":port",$database->getPort(),PDO::PARAM_INT);
             $statement->bindValue(":url",$database->getHost(),PDO::PARAM_STR);
             $statement->bindValue(":used_type",$database->getusedType(),PDO::PARAM_STR);
             $statement->bindValue(":user" ,$database->getUserName(),PDO::PARAM_STR);
