@@ -1,5 +1,5 @@
 <?php
-require_once('C:\wamp64\www\SafeBase\src\Restore_Backup_Postgres\FileEmpty.php');
+require_once('./FileEmptyTest.php');
 
 use SAFEBASE\Restore_Backup_Postgres\FileEmpty;
 use PHPUnit\Framework\TestCase;
