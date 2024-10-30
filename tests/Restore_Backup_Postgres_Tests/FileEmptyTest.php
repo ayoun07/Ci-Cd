@@ -1,5 +1,5 @@
 <?php
-require_once('./FileEmptyTest.php');
+require_once dirname(__DIR__).'/FileEmptyTest.php';
 
 use SAFEBASE\Restore_Backup_Postgres\FileEmpty;
 use PHPUnit\Framework\TestCase;
