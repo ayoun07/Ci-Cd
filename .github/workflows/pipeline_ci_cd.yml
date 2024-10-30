@@ -60,7 +60,7 @@ jobs:
           chmod +x vendor/bin/phpunit
 
       - name: Run PHPUnit tests
-        run: php vendor/bin/phpunit
+        run: php ./vendor/bin/phpunit
 
   # docker:
   #   runs-on: ubuntu-latest
