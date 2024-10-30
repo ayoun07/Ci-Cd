@@ -10,10 +10,10 @@ class FindFileTest extends TestCase{
         $fileexist = $object->findFile(__DIR__.'/backup_postgres.sql');
         $this->assertTrue($fileexist);
     }
-    public function testfindfileexistFailures()
-    {
-        $object = new FindFile();
-        $fileexist = $object->findFile(__DIR__.'/backup_postgres.sql');
-        $this->assertFalse($fileexist);
-    }
+    // public function testfindfileexistFailures()
+    // {
+    //     $object = new FindFile();
+    //     $fileexist = $object->findFile(__DIR__.'/backup_postgres.sql');
+    //     $this->assertFalse($fileexist);
+    // }
 }
