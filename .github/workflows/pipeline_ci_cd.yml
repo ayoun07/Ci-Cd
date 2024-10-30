@@ -69,8 +69,16 @@ jobs:
           push: true
           tags: ghcr.io/ayoun07/ci-cd:latest
         
-      - name: Send notification to Google Chat
+      - name: Envoi de notification à Google Chat
         run: |
-          curl -X POST -H "Content-Type: application/json" -d '{
-            "text": "Une nouvelle version a été déployée sur `ayoun` !"
-          }' https://chat.googleapis.com/v1/spaces/AAAAbk_h9Ic/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=45z-u4OTa1tsHft-HJzUvjcaDyTf4k70Dj3FFjOVnFs
+          response=$(curl -s -w "\n%{http_code}" -X POST -H "Content-Type: application/json" -d '{
+          "text": "Une nouvelle version a été déployée sur `ayoun` !"
+          }' "https://chat.googleapis.com/v1/spaces/AAAAbk_h9Ic/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=45z-u4OTa1tsHft-HJzUvjcaDyTf4k70Dj3FFjOVnFs")
+          body=$(echo "$response" | sed -e '$d')
+          status=$(echo "$response" | tail -n1)
+          echo "Statut de la réponse : $status"
+          echo "Corps de la réponse : $body"
+          if [ "$status" != "200" ]; then
+            echo "Erreur lors de l'envoi de la notification."
+            exit 1
+          fi
