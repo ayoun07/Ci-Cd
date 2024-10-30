@@ -2,8 +2,9 @@
 require_once('C:\wamp64\www\SafeBase\src\Restore_Backup_Postgres\FileEmpty.php');
 
 use SAFEBASE\Restore_Backup_Postgres\FileEmpty;
+use PHPUnit\Framework\TestCase;
 
-class FileEmptyTest extends \PHPUnit\Framework\TestCase{
+class FileEmptyTest extends TestCase{
 
     public function testIsEmpty(){
         $object = new FileEmpty();

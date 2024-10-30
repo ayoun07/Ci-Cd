@@ -1,8 +1,9 @@
 <?php
 require_once('C:\wamp64\www\SafeBase\src\Restore_Backup_Postgres\FindFile.php');
 use SAFEBASE\Restore_Backup_Postgres\FindFile;
+use PHPUnit\Framework\TestCase;
 
-class FindFileTest extends \PHPUnit\Framework\TestCase{
+class FindFileTest extends TestCase{
     public function testfindfileexist(){
         $object=new FindFile();
         $fileexist = $object->findFile('C:\wamp64\www\safebase\tests\Restore_Backup_Postgres_Tests\backup_postgres.sql');
