@@ -1,5 +1,5 @@
 <?php
-require_once('C:\wamp64\www\SafeBase\src\Restore_Backup_Postgres\FindFile.php');
+require_once dirname(__DIR__) . '/Restore_Backup_Postgres_Tests/FindFileTest.php';
 use SAFEBASE\Restore_Backup_Postgres\FindFile;
 use PHPUnit\Framework\TestCase;
 
