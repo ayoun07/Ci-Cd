@@ -1,8 +1,9 @@
 <?php
 
 use SAFEBASE\Restore_Backup_Postgres\Backup;
+use PHPUnit\Framework\TestCase;
 
-class BackupTest extends PHPUnit_Framework_TestCase{
+class BackupTest extends TestCase{
 
 
     public function testbackup():void{
