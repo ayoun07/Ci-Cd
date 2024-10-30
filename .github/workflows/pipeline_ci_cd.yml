@@ -54,8 +54,13 @@ jobs:
       - name: Install Composer dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
+      - name: Prepare for PHPUnit
+        run: |
+          chmod -R 755 vendor
+          chmod +x vendor/bin/phpunit
+
       - name: Run PHPUnit tests
-        run: vendor/bin/phpunit
+        run: php vendor/bin/phpunit
 
   # docker:
   #   runs-on: ubuntu-latest
