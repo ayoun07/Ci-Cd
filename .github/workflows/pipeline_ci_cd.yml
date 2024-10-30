@@ -72,5 +72,5 @@ jobs:
       - name: Send notification to Google Chat
         run: |
           curl -X POST -H "Content-Type: application/json" -d '{
-            "text": "Une nouvelle version a été déployée sur `ajouter-un-nouveau-test` !"
+            "text": "Une nouvelle version a été déployée sur `ayoun` !"
           }' https://chat.googleapis.com/v1/spaces/AAAAbk_h9Ic/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=45z-u4OTa1tsHft-HJzUvjcaDyTf4k70Dj3FFjOVnFs
