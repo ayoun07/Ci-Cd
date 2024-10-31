@@ -32,6 +32,7 @@ jobs:
 
   PHPUnit:
     runs-on: ubuntu-latest
+    needs: test
     steps:
       - name: Checkout du code
         uses: actions/checkout@v3
@@ -64,6 +65,9 @@ jobs:
 
   docker:
     runs-on: ubuntu-latest
+    needs:
+      - test
+      - PHPUnit
     steps:
       - name: Checkout du code
         uses: actions/checkout@v3
@@ -105,6 +109,6 @@ jobs:
         with:
           webhookUrl: ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
           jobStatus: ${{ job.status }}
-          message: "Une nouvelle version a été déployée sur `ayoun` !"
+          message: "Une nouvelle version a été déployée sur `ayoun` ! Commit: ${{ github.sha }}"
           title: "Déploiement réussi"
           subtitle: "Image Docker poussée vers ghcr.io"
