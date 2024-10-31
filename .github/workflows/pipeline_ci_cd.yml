@@ -5,7 +5,7 @@ on:
     branches:
       - ayoun
 
-  pull-request:
+  pull request:
     branches:
       - main
 
