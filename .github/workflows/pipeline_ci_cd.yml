@@ -6,7 +6,7 @@ on:
       - ayoun
 
 jobs:
-  PHP:
+  build:
     runs-on: ubuntu-latest
     container:
       image: php:8.2-apache
