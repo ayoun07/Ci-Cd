@@ -114,29 +114,29 @@ jobs:
   #         title: "Statut du job de test"
   #         subtitle: "Image Docker poussée vers ghcr.io || Commit responsable: ${{ github.sha }}"
   Googletchat:
-  runs-on: ubuntu-latest
-  needs:
-    - test
-    - PHPUnit
-    - Docker
-  if: always() # Toujours exécuter ce job
-  steps:
-    - name: Notify Google Chat
-      uses: SimonScholz/google-chat-action@main
-      with:
-        webhookUrl: ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
-        jobStatus: >
-          ${{ needs.test.result == 'success' && 
-              needs.PHPUnit.result == 'success' && 
-              needs.Docker.result == 'success' 
-              ? 'success' : 'failure' }}
-        message: >
-          Le job de test s'est terminé avec le statut :
-          ${{ needs.test.result == 'success' && 
-              needs.PHPUnit.result == 'success' && 
-              needs.Docker.result == 'success' 
-              ? 'success' : 'failure' }} 
-          pour le commit ${{ github.sha }}.
-        title: "Statut du job de test"
-        subtitle: >
-          Image Docker poussée vers ghcr.io || Commit responsable: ${{ github.sha }}.
+    runs-on: ubuntu-latest
+    needs:
+      - test
+      - PHPUnit
+      - Docker
+    if: always() # Toujours exécuter ce job
+    steps:
+      - name: Notify Google Chat
+        uses: SimonScholz/google-chat-action@main
+        with:
+          webhookUrl: ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
+          jobStatus: >
+            ${{ needs.test.result == 'success' && 
+                needs.PHPUnit.result == 'success' && 
+                needs.Docker.result == 'success' 
+                ? 'success' : 'failure' }}
+          message: >
+            Le job de test s'est terminé avec le statut :
+            ${{ needs.test.result == 'success' && 
+                needs.PHPUnit.result == 'success' && 
+                needs.Docker.result == 'success' 
+                ? 'success' : 'failure' }} 
+            pour le commit ${{ github.sha }}.
+          title: "Statut du job de test"
+          subtitle: >
+            Image Docker poussée vers ghcr.io || Commit responsable: ${{ github.sha }}.
