@@ -34,16 +34,6 @@ jobs:
       - name: Install dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
-      - name: Notify Google Chat
-        if: always()
-        uses: SimonScholz/google-chat-action@main
-        with:
-          webhookUrl: ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
-          jobStatus: ${{ job.status }}
-          message: "Le job de test s'est terminé avec le statut : ${{ job.status }} pour le commit ${{ github.sha }}."
-          title: "Statut du job de test"
-          subtitle: "Commit responsable: ${{ github.sha }}"
-
   PHPUnit:
     runs-on: ubuntu-latest
     needs: test
@@ -78,16 +68,6 @@ jobs:
       - name: Run PHPUnit tests
         run: php ./vendor/bin/phpunit
 
-      - name: Notify Google Chat
-        if: always()
-        uses: SimonScholz/google-chat-action@main
-        with:
-          webhookUrl: ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
-          jobStatus: ${{ job.status }}
-          message: "Le job de test s'est terminé avec le statut : ${{ job.status }} pour le commit ${{ github.sha }}."
-          title: "Statut du job de test"
-          subtitle: "Commit responsable: ${{ github.sha }}"
-
   Docker:
     runs-on: ubuntu-latest
     needs:
@@ -115,21 +95,15 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ghcr.io/ayoun07/ci-cd:latest
-        
-      # - name: Envoi de notification à Google Chat
-      #   run: |
-      #     response=$(curl -s -w "\n%{http_code}" -X POST -H "Content-Type: application/json" -d '{
-      #     "text": "Une nouvelle version a été déployée sur `ayoun` !"
-      #     }' "https://chat.googleapis.com/v1/spaces/AAAAbk_h9Ic/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=45z-u4OTa1tsHft-HJzUvjcaDyTf4k70Dj3FFjOVnFs")
-      #     body=$(echo "$response" | sed -e '$d')
-      #     status=$(echo "$response" | tail -n1)
-      #     echo "Statut de la réponse : $status"
-      #     echo "Corps de la réponse : $body"
-      #     if [ "$status" != "200" ]; then
-      #       echo "Erreur lors de l'envoi de la notification."
-      #       exit 1
-      #     fi
 
+  Googletchat:
+    runs-on: ubuntu-latest
+    needs:
+      - test
+      - PHPUnit
+      - Docker
+    if: success()
+    steps:
       - name: Notify Google Chat
         if: always()
         uses: SimonScholz/google-chat-action@main
