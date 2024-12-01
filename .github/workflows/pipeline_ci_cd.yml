@@ -102,7 +102,6 @@ jobs:
       - test
       - PHPUnit
       - Docker
-    if: success()
     steps:
       - name: Notify Google Chat
         if: always()
