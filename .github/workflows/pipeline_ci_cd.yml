@@ -102,10 +102,9 @@ jobs:
       - test
       - PHPUnit
       - Docker
-    if: success()
     steps:
       - name: Notify Google Chat
-      if: always()
+        if: always()
         uses: SimonScholz/google-chat-action@main
         with:
           webhookUrl: ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
