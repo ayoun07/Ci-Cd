@@ -114,29 +114,29 @@ jobs:
   #         title: "Statut du job de test"
   #         subtitle: "Image Docker poussée vers ghcr.io || Commit responsable: ${{ github.sha }}"
 
-Googletchat:
-  runs-on: ubuntu-latest
-  needs:
-    - test
-    - PHPUnit
-    - Docker
-  if: always()
-  steps:
-    - name: Notify Google Chat
-      uses: SimonScholz/google-chat-action@main
-      with:
-        webhookUrl: ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
-        jobStatus: ${{ job.status }}
-        message: |
-          Statut global: ${{ job.status }}
-          
-          Détails des jobs:
-          - Test: ${{ needs.test.result }}
-          - PHPUnit: ${{ needs.PHPUnit.result }}
-          - Docker: ${{ needs.Docker.result }}
-          
-          ${{ job.status == 'success' && 'Tous les jobs ont réussi!' || 'Au moins un job a échoué.' }}
-          
-          Commit: ${{ github.sha }}
-        title: "Statut des jobs"
-        subtitle: "Image Docker poussée vers ghcr.io || Commit: ${{ github.sha }}"
+  Googletchat:
+    runs-on: ubuntu-latest
+    needs:
+      - test
+      - PHPUnit
+      - Docker
+    if: always()
+    steps:
+      - name: Notify Google Chat
+        uses: SimonScholz/google-chat-action@main
+        with:
+          webhookUrl: ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
+          jobStatus: ${{ job.status }}
+          message: |
+            Statut global: ${{ job.status }}
+            
+            Détails des jobs:
+            - Test: ${{ needs.test.result }}
+            - PHPUnit: ${{ needs.PHPUnit.result }}
+            - Docker: ${{ needs.Docker.result }}
+            
+            ${{ job.status == 'success' && 'Tous les jobs ont réussi!' || 'Au moins un job a échoué.' }}
+            
+            Commit: ${{ github.sha }}
+          title: "Statut des jobs"
+          subtitle: "Image Docker poussée vers ghcr.io || Commit: ${{ github.sha }}"
