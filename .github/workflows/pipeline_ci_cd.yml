@@ -128,14 +128,12 @@ jobs:
           jobStatus: >
             ${{ needs.test.result == 'success' && 
                 needs.PHPUnit.result == 'success' && 
-                needs.Docker.result == 'success' 
-                'success' : 'failure' }}
+                needs.Docker.result == 'success'}}
           message: >
             Le job de test s'est terminé avec le statut :
             ${{ needs.test.result == 'success' && 
                 needs.PHPUnit.result == 'success' && 
-                needs.Docker.result == 'success' 
-                'success' : 'failure' }} 
+                needs.Docker.result == 'success'}} 
             pour le commit ${{ github.sha }}.
           title: "Statut du job de test"
           subtitle: >
