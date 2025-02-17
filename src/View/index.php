@@ -31,7 +31,7 @@ require "header.php";
                             <th scope="col">URL</th>
                             <th scope="col">Used_type</th>
                             <th scope="col">User-database</th>
-                            <th scope="col"></th>
+                            <th scope="col">Actions</th>
                         </tr>
                     </thead>
                     <tbody>

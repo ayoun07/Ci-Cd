@@ -4,7 +4,7 @@ services:
   php:
     build:
       context: .
-      dockerfile: Dockerfile  # Spécifiez le Dockerfile si nécessaire
+      dockerfile: Dockerfile # Spécifiez le Dockerfile si nécessaire
     ports:
       - "8080:80"
     volumes:
@@ -13,6 +13,8 @@ services:
       APACHE_DOCUMENT_ROOT: /var/www/html
     depends_on:
       - mysql
+    networks:
+      - safebase-network
 
   mysql:
     image: mysql:8.0.31
@@ -26,6 +28,8 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
       - ./grant_privileges.sql:/docker-entrypoint-initdb.d/grant_privileges.sql
+    networks:
+      - safebase-network
 
   phpmyadmin:
     image: phpmyadmin
@@ -41,6 +45,12 @@ services:
       - "8081:80"
     depends_on:
       - mysql
+    networks:
+      - safebase-network
 
 volumes:
   mysql_data:
+
+networks:
+  safebase-network:
+    driver: bridge

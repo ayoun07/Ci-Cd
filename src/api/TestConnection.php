@@ -1,14 +1,16 @@
 <?php
+
 namespace Safebase\api;
 
 use Safebase\dao\DaoAppli;
 
 class TestConnection
 {
-    public function test($database):bool
+    public function test($database): bool
     {
-        $type='mysql';
         $dao = new DaoAppli;
+
+        // Déterminer le port
         if ($database->getPort() == 'default') {
             if ($database->getType()->getName() == 'mysql') {
                 $database->setPort('3306');
@@ -16,68 +18,67 @@ class TestConnection
                 $database->setPort('5432');
             }
         }
+
         $dao->tryConnection($database);
-        $db_name = $database ->getName();
-        $port = $database->getPort();
-        $host = $database->getHost();
+
+        // Récupération des infos DB
+        $db_name  = $database->getName();
+        $port     = $database->getPort();
+        $host     = $database->getHost();
         $username = $database->getUserName();
         $password = $database->getPassword();
 
-        
+        // 🔥 Correction : Gestion du bon hôte en fonction de l'environnement
+        if (php_sapi_name() !== 'cli' && $host === 'mysql') {
+            $host = 'mysql';
+            $port = '3306'; // Port exposé en dehors de Docker
+        }
+
+        // Création du répertoire pour les dumps
+        $root_path = $_SERVER['DOCUMENT_ROOT'];
+        $directory = $root_path . DIRECTORY_SEPARATOR . 'dumps' . DIRECTORY_SEPARATOR . $db_name;
+
+        if (!file_exists($directory)) {
+            mkdir($directory, 0777, true);
+            echo "Le dossier $directory a été créé.<br>";
+        } else {
+            echo "Le dossier $directory existe déjà.<br>";
+        }
+
+        // Nom du fichier de dump
         $date = date("Y-m-d_H-i-s");
         $dump_name = $db_name . '_' . $date . '.sql';
-        $root_path = $_SERVER['DOCUMENT_ROOT'];
-        $ExportPath = $root_path . DIRECTORY_SEPARATOR . 'dumps' . DIRECTORY_SEPARATOR  . $db_name . DIRECTORY_SEPARATOR . $dump_name;
+        $ExportPath = $directory . DIRECTORY_SEPARATOR . $dump_name;
 
-        //vérifier si un dossier de dumps est déjà créé pour cette DB, sinon le créer
-        $directory = $root_path . DIRECTORY_SEPARATOR . 'dumps' . DIRECTORY_SEPARATOR  . $db_name;
-        if (file_exists($directory)) {
-            echo ("'Le dossier '.$directory.' existe.<br>'");
+        // Construction de la commande mysqldump
+        if ($database->getType()->getName() == 'mysql') {
+            $commande = "mysqldump --opt --port=$port -h $host -u $username";
+            if (!empty($password)) {
+                $commande .= " -p$password";
+            }
+            $commande .= " $db_name > \"$ExportPath\" 2>&1"; // 🔥 Ajout de `2>&1` pour capturer les erreurs
         } else {
-            echo ("'Le dossier '.$directory.' n'existe pas.<br>'");
-            mkdir($directory);
-            echo ("Le dossier '.$directory.' a été créé. ");
+            $commande = "set PGPASSWORD=$password && pg_dump -U $username -h $host -p$port $db_name > \"$ExportPath\" 2>&1";
         }
-        if ($type == 'mysql') {
-            // mysqldump --opt --single-transaction -h localhost -u root -ptoto super-reminder > "C:\\wamp64\\www\\laplateforme\\safebase-1\\dumps"
-            $commande = 'mysqldump --opt --port=' . $port . ' -h ' . $host . ' -u ' . $username . ' -p' . $password . ' ' . $db_name . ' > "' . $ExportPath . '"';
-        }
-        if ($type == 'pgsql') {
-            // pg_dump -U utilisateur -h hôte -p port nom_de_la_base > fichier_de_dump.sql
-            $commande = 'set PGPASSWORD=toto&& pg_dump -U ' . $username . ' -h ' . $host . ' -p' . $port . ' ' . $db_name . ' > ' . $ExportPath . '';
-        }
-        echo ('type');
-        echo $type;
-        echo('<BR>');
-        echo ('commande');
-        echo $commande;
-        
+
+        echo "Commande exécutée : $commande <br>";
+
+        // Exécution de la commande
         exec($commande, $output, $result);
-        echo ('<hr><pre>');
+
+        echo '<pre>';
         echo "Code de résultat : " . $result . PHP_EOL;
-        echo "Sortie de la commande (output) : " . PHP_EOL;
-        // var_dump($output);
-        echo ('</pre>');
+        echo "Sortie de la commande : " . implode("\n", $output) . PHP_EOL;
+        echo '</pre>';
 
-        switch ($result) {
-            case 0:
-                echo 'La base de données <b>' . $db_name . '</b> a été sauvegardée avec succès dans le chemin suivant : ' . getcwd() . '/' . $ExportPath;
-                $isOk = true;
-                $dao->createBackup($database->getId(),$dump_name);
-                break;
-            case 1:
-                $isOk=false;
-                echo 'Une erreur s\'est produite lors de l\'exportation de <b>' . $db_name . '</b> vers ' . getcwd() . '/' . $ExportPath;
-                break;
-            default:
-                $isOk=false;
-                echo 'Une erreur d\'exportation s\'est produite, veuillez vérifier les informations de connexion.';
+        // Gestion des erreurs
+        if ($result === 0) {
+            echo "La base de données <b>$db_name</b> a été sauvegardée avec succès dans : <b>$ExportPath</b>";
+            $dao->createBackup($database->getId(), $dump_name);
+            return true;
+        } else {
+            echo "❌ Erreur lors de l'exportation de <b>$db_name</b>.";
+            return false;
         }
-
-
-        // echo ('<hr><pre>');
-        // var_dump($GLOBALS);
-        // echo ('</pre>');
-        return $isOk;
     }
 }

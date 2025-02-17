@@ -15,13 +15,14 @@ class Cron
     private ?string $recurrence;
     private ?Database $database;
 
-    public function __construct(?int $id=1,
-        ?string $name ='',
-        ?DateTime $dateStart =null,
-        ?DateTime $heure=null,
-        ?string $recurrence='',
-        ?Database $database = new Database())
-         {
+    public function __construct(
+        ?int $id = 1,
+        ?string $name = '',
+        ?DateTime $dateStart = null,
+        ?DateTime $heure = null,
+        ?string $recurrence = '',
+        ?Database $database = new Database()
+    ) {
         $this->id = $id;
         $this->name = $name;
         $this->dateStart = $dateStart;
@@ -92,36 +93,34 @@ class Cron
     {
         $dao = new DaoAppli;
         $dao->getListCron();
-    } 
+    }
 
     public function deleteCron(int $id)
     {
-       $dao = new DaoAppli;
-       $dao->deleteCron($id);
-
+        $dao = new DaoAppli;
+        $dao->deleteCron($id);
     }
 
     public function create()
     {
+        // exec('echo "* * * * * php ../../toto.php" | crontab -');
         $dao = new DaoAppli;
         // format la date de demarrage
         $dateTime = \DateTime::createFromFormat('Y-m-d', $_POST['datestart']);
         $time = \DateTime::createFromFormat('H:i', $_POST['heure']);
-       if ($dateTime and $time) {
+        if ($dateTime and $time) {
             // $this->database->setId($_POST['iddatabase']);
             // $database = new Database();
             $this->database = $this->database->getDataById($_POST['iddatabase']);
             $cron = new Cron(1, $_POST['nom'], $dateTime, $time, $_POST['recurrence'], $this->database);
             if ($dao->createNewTask($cron)) {
-        
+
                 $CreateDump = new Testconnection();
                 $CreateDump->test($this->database);
                 require_once 'cronExec.php';
-                }
-             else {
+            } else {
                 echo ('echec de l enregistrement');
             }
-        
         } else {
             echo "La conversion a échoué.";
         }
@@ -135,16 +134,15 @@ class Cron
         $scriptPath = 'C:\wamp64\www\safeBase\src\api\TestConnection.php';
 
         // Vérifie si le système d'exploitation est Windows
- 
 
-        echo 'Création de la tâche cron sous Windows via PHP...';   
+
+        echo 'Création de la tâche cron sous Windows via PHP...';
 
         // Commande pour créer la tâche cron
         $command = "schtasks /create /tn \"testCronPHP\" /tr \"$phpPath $scriptPath\" /sc minute /mo 1";
 
         // Exécute la commande
         exec($command, $output, $result);
-    
     }
     /**
      * Get the value of database

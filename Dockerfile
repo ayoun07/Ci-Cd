@@ -15,6 +15,15 @@ RUN apt-get update && apt-get install -y \
 
 # Installer Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN apt-get update && apt-get install -y default-mysql-client
+
+# Installe cron
+# RUN apt-get update && apt-get install -y cron
+
+# Copie le crontab personnalisé dans le conteneur
+# RUN touch /etc/cron.d/my-cron-job
+# Donne les bons droits
+# RUN chmod 0644 /etc/cron.d/my-cron-job && crontab /etc/cron.d/my-cron-job
 
 # Définir le répertoire de travail
 WORKDIR /var/www/html
@@ -36,3 +45,7 @@ RUN a2enmod rewrite
 
 # Exposer le port 80
 EXPOSE 80
+
+# Assure-toi que cron tourne en arrière-plan
+# CMD ["cron", "-f"]
+
